@@ -10,33 +10,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Tilemap collisionTilemap;
 
-    private PlayerMovement controls;
-
-    private void Awake()
+    public void Attack()
     {
-        controls = new PlayerMovement();
+
     }
 
-    private void OnEnable()
-    {
-        controls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.Disable();
-    }
-
-    private void Start()
-    {
-        controls.Main.Movement.performed += ctx => Move(ctx.ReadValue<Vector2>());
-    }
-
-    private void Move(Vector2 direction)
+    public bool Move(Vector2 direction)
     {
         if(CanMove(direction))
         {
             transform.position += (Vector3)direction;
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
