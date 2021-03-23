@@ -8,6 +8,8 @@ public class BeatTrigger : MonoBehaviour
     public Sprite defaultImage;
     public Sprite pressedImage;
 
+    public static bool canBePressed=false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,5 +20,21 @@ public class BeatTrigger : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Beat"))
+        {
+            canBePressed = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Beat"))
+        {
+            canBePressed = false;
+        }
     }
 }

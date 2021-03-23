@@ -4,22 +4,32 @@ using UnityEngine;
 
 public class BeatMovement : MonoBehaviour
 {
-    private float beatTempo;
+    [SerializeField]
+    private float beatTempo=60;
 
-    public bool hasStarted;
+    private static bool hasStarted=false;
+    private float beatSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        beatSpeed = beatTempo / 60;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(hasStarted)
+        {
+            transform.position -= new Vector3(beatSpeed*Time.deltaTime, 0f, 0f);
+        }
+    }
+
+    public static void Begin()
+    {
         if(!hasStarted)
         {
-
+            hasStarted = true;
         }
     }
 }

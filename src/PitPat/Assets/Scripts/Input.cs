@@ -38,12 +38,16 @@ public class Input : MonoBehaviour
     {
         Command newCommand = new Move();
         newCommand.Execute(CommandTarget,direction);
+        Command beatCommand = new PlayBeat();
+        beatCommand.Execute(CommandTarget);
     }
 
     private void AttackCommand()
     {
         Command newCommand = new Attack();
         newCommand.Execute(CommandTarget);
+        Command beatCommand = new PlayBeat();
+        beatCommand.Execute(CommandTarget);
     }
 
 }

@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     public bool Move(Vector2 direction)
     {
-        if(CanMove(direction))
+        if(BeatTrigger.canBePressed&&CanMove(direction))
         {
             transform.position += (Vector3)direction;
             return true;
