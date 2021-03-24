@@ -14,6 +14,7 @@ public class BeatMovement : MonoBehaviour
     void Start()
     {
         beatSpeed = beatTempo / 60;
+        Begin();
     }
 
     // Update is called once per frame

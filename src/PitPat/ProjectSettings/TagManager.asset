@@ -45,3 +45,6 @@ TagManager:
   - name: Player
     uniqueID: 2924136365
     locked: 0
+  - name: Rhythm
+    uniqueID: 2084870679
+    locked: 0

@@ -31,6 +31,7 @@ public class Input : MonoBehaviour
     private void Start()
     {
         controls.Main.Movement.performed += ctx => MoveCommand(ctx.ReadValue<Vector2>());
+        controls.Main.Rotate.performed += ctx => RotateCommand(ctx.ReadValue<Vector2>());
         controls.Main.Attack.performed += ctx => AttackCommand();
     }
 
@@ -38,16 +39,17 @@ public class Input : MonoBehaviour
     {
         Command newCommand = new Move();
         newCommand.Execute(CommandTarget,direction);
-        Command beatCommand = new PlayBeat();
-        beatCommand.Execute(CommandTarget);
+    }
+    private void RotateCommand(Vector2 direction)
+    {
+        Command newCommand = new Rotate();
+        newCommand.Execute(CommandTarget, direction);
     }
 
     private void AttackCommand()
     {
         Command newCommand = new Attack();
         newCommand.Execute(CommandTarget);
-        Command beatCommand = new PlayBeat();
-        beatCommand.Execute(CommandTarget);
     }
 
 }

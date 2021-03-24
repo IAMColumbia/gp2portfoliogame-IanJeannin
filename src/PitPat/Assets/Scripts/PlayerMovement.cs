@@ -33,17 +33,25 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""f30fce9a-1d12-4504-be26-9364937d4846"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""793e5459-4bbf-471c-9052-7f2d6af0bcc9"",
-                    ""path"": """",
+                    ""id"": ""ba906e6f-f24f-466e-95b4-d7f90d74b4d3"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -104,69 +112,58 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Arrows"",
-                    ""id"": ""4859625c-0d23-4608-b6d0-5381d1082d80"",
+                    ""id"": ""c5da361c-ff67-4ee0-9cd2-4cddea3c49e5"",
                     ""path"": ""2DVector"",
                     ""interactions"": ""Press"",
                     ""processors"": ""NormalizeVector2"",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""Rotate"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""add539f1-691e-4276-97ef-b8b9a5580b09"",
+                    ""id"": ""5706633f-71eb-4477-8028-69d3dd8278df"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""9703246c-5ba7-4c0e-a2e9-5f49c0dd7e9f"",
+                    ""id"": ""4629da26-dcff-4838-80f4-5537e789dc7b"",
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""cac4d8f7-b35c-4f40-8a7d-d9191ad1e53d"",
+                    ""id"": ""8050812d-8277-4098-9152-3a1352c56fcb"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""4f811875-23b0-4110-b984-d3734a102d02"",
+                    ""id"": ""14a36413-6242-4fd9-b48b-0ed171ce49aa"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ba906e6f-f24f-466e-95b4-d7f90d74b4d3"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -177,6 +174,7 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
         m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
         m_Main_Movement = m_Main.FindAction("Movement", throwIfNotFound: true);
         m_Main_Attack = m_Main.FindAction("Attack", throwIfNotFound: true);
+        m_Main_Rotate = m_Main.FindAction("Rotate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -228,12 +226,14 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
     private IMainActions m_MainActionsCallbackInterface;
     private readonly InputAction m_Main_Movement;
     private readonly InputAction m_Main_Attack;
+    private readonly InputAction m_Main_Rotate;
     public struct MainActions
     {
         private @PlayerMovement m_Wrapper;
         public MainActions(@PlayerMovement wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Main_Movement;
         public InputAction @Attack => m_Wrapper.m_Main_Attack;
+        public InputAction @Rotate => m_Wrapper.m_Main_Rotate;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -249,6 +249,9 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
                 @Attack.started -= m_Wrapper.m_MainActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnAttack;
+                @Rotate.started -= m_Wrapper.m_MainActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnRotate;
             }
             m_Wrapper.m_MainActionsCallbackInterface = instance;
             if (instance != null)
@@ -259,6 +262,9 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
             }
         }
     }
@@ -267,5 +273,6 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
     }
 }

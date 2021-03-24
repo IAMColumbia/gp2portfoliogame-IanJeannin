@@ -2,20 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attack : Command
+public class Rotate : Command
 {
-    public Attack() : base()
+    public Rotate() : base()
     {
-        this.commandName = "Attack";
+        this.commandName = "Rotate";
     }
-    public override void Execute(GameObject go)
+    public override void Execute(GameObject go, Vector2 direction)
     {
         //Different Game Components may move differently check if the go is a CommandPacMan
         var target = go.GetComponent<PlayerController>();
         if (target is PlayerController)
         {
-            target.Attack();
-            base.Execute(go);
+            if (target.Rotate(direction))
+            {
+                base.Execute(go);
+            }
         }
     }
 }
