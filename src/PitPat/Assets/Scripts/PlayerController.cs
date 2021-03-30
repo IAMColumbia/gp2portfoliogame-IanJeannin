@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
         if(BeatTrigger.canBePressed==true && beatHit == false)
         {
             beatHit = true;
+            BeatTrigger.beatsHit++;
             unitAttack.Attack(attackGrid, lastDirection, attackMarker,damage);
         }
     }
@@ -67,6 +68,7 @@ public class PlayerController : MonoBehaviour
         if(BeatTrigger.canBePressed && beatHit == false)
         {
             beatHit = true;
+            BeatTrigger.beatsHit++;
             lastDirection = direction;
             return movement.Move(direction);
         }
@@ -81,6 +83,7 @@ public class PlayerController : MonoBehaviour
         if (BeatTrigger.canBePressed&&beatHit==false)
         {
             beatHit = true;
+            BeatTrigger.beatsHit++;
             lastDirection = direction;
             return movement.Rotate(direction);
         }

@@ -8,17 +8,18 @@ public class CreateGrid : MonoBehaviour
     [SerializeField]
     Grid gridBase;
     [SerializeField]
-    Tilemap floor;                         // walkable tilemap
+    Tilemap floor;
     [SerializeField]
-    List<Tilemap> obstacleLayers;   // all layers that contain objects to navigate around
-    public GameObject gridNode;            // where the generated tiles will be stored
-    public GameObject nodePrefab;          // world tile prefab
+    List<Tilemap> obstacleLayers;
+    //Object where tiles will be stored
+    public GameObject gridNode; 
+    public GameObject nodePrefab;
 
-    //these are the bounds of where we are searching in the world for tiles, have to use world coords to check for tiles in the tile map
+    //Searching bounds
     public int scanStartX = -300, scanStartY = -300, scanFinishX = 300, scanFinishY = 300, gridSizeX, gridSizeY;
 
-    private List<GameObject> unsortedNodes=new List<GameObject>();   // all the nodes in the world
-    public GameObject[,] nodes;           // sorted 2d array of nodes, may contain null entries if the map is of an odd shape e.g. gaps
+    private List<GameObject> unsortedNodes=new List<GameObject>();   // all nodes
+    public GameObject[,] nodes;           // sorted 2d array of nodes
     public int gridBoundX = 0, gridBoundY = 0;
     void Start()
     {
