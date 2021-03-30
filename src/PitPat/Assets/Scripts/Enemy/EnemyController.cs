@@ -16,8 +16,10 @@ public class EnemyController : MonoBehaviour
     //Player starts the game looking down
     private Vector3 lastDirection = new Vector3(0, -1, 0);
 
+    [Tooltip("The percentage that failure chance is increased for each beat the player misses. Maximum of 10 for 100%. Minimum of 0.")]
     [SerializeField]
-    private float minSuccessChance=30;
+    [Range(0,10)]
+    private float missedBeatWeight=7.5f;
     [SerializeField]
     private float maxSuccessChance = 100;
     private float failureChance=30;
@@ -61,6 +63,7 @@ public class EnemyController : MonoBehaviour
     }
 
     bool hasMovedThisBeat = false;
+
     private void Update()
     {
         if(BeatTrigger.canBePressed==true&&hasMovedThisBeat==false)
@@ -68,10 +71,6 @@ public class EnemyController : MonoBehaviour
             hasMovedThisBeat = true;
             float successChance = Random.Range(0, 100);
             float successMarker = maxSuccessChance - failureChance;
-            if(successMarker<minSuccessChance)
-            {
-                successMarker = minSuccessChance;
-            }
             // If the random is within the success range
             if (successChance<= successMarker)
             {
@@ -88,6 +87,12 @@ public class EnemyController : MonoBehaviour
                 {
                     attackManager.GetAttack().Execute(this.gameObject);
                 }
+            }
+            if(BeatTrigger.beatsCounter==10)
+            {
+                //Every missed beat gives the AI a 7.5% greater chance of failure.
+                //Because this is checked every 10 beats, there is a min
+                failureChance = maxSuccessChance - ((BeatTrigger.beatsCounter - BeatTrigger.beatsHit)*missedBeatWeight);
             }
         }
         else if(BeatTrigger.canBePressed==false&&hasMovedThisBeat==true)
