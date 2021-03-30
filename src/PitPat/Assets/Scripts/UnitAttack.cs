@@ -72,7 +72,7 @@ public class UnitAttack: MonoBehaviour
                 {
                     Collider2D [] enemyColliders=new Collider2D[1];
                     //TODO: AttackTile
-                    LayerMask mask = LayerMask.GetMask("Enemies");
+                    LayerMask mask = LayerMask.GetMask("Enemies","Player");
                     ContactFilter2D filter = new ContactFilter2D();
                     filter.layerMask = mask;
                     Physics2D.OverlapCircle(targetedSpace, 0.05f, filter, enemyColliders);
@@ -157,7 +157,7 @@ public class UnitAttack: MonoBehaviour
     {
         foreach (Transform child in markerHolder.transform)
         {
-            Destroy(child.gameObject);
+           Destroy(child.gameObject);
         }
     }
 }

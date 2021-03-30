@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    private UnitAttack unitAttack;
-    private UnitProfile unitProfile;
     [SerializeField]
     private GameObject markerHolder;
     [SerializeField]
     private Pathfinding pathfinding;
     [SerializeField]
     private GameObject player;
+    [SerializeField]
+    private GameObject attackMarker;
+
+    //Player starts the game looking down
+    private Vector3 lastDirection = new Vector3(0, -1, 0);
 
     [SerializeField]
     private float minSuccessChance=30;
@@ -19,8 +22,21 @@ public class EnemyController : MonoBehaviour
     private float maxSuccessChance = 100;
     private float failureChance=30;
 
+    private UnitAttack unitAttack;
+    private UnitProfile unitProfile;
+    private AttackManager attackManager;
+    private Movement movement;
+
     private void Start()
     {
+        if(this.gameObject.GetComponent<AttackManager>()==true)
+        {
+            attackManager = this.gameObject.GetComponent<AttackManager>();
+        }
+        else
+        {
+            attackManager = new AttackManager();
+        }
         if(markerHolder==null)
         {
             markerHolder = Instantiate(new GameObject("Marker Holder"));
@@ -33,11 +49,13 @@ public class EnemyController : MonoBehaviour
         unitAttack.Initialize(this.gameObject, markerHolder);
         unitProfile = this.gameObject.AddComponent<UnitProfile>();
         unitProfile.Initialize(3);
+        movement = this.gameObject.AddComponent<Movement>(); //Enemy doesn't need to initialize
     }
 
     void SetMovementVector()
     {
         Vector2 nextMove = pathfinding.FindPath(this.transform.position,player.transform.position);
+        Rotate(nextMove);
         this.transform.position += (Vector3)nextMove;
         Debug.Log("Enemy moves: " + nextMove);
     }
@@ -59,6 +77,15 @@ public class EnemyController : MonoBehaviour
                 if (IsAdjacentToPlayer() == false)
                 {
                     SetMovementVector();
+                }
+                else if(this.transform.position+lastDirection!=player.transform.position)
+                {
+                    Vector2 lookDirection = player.transform.position - this.transform.position;
+                    Rotate(lookDirection);
+                }
+                else
+                {
+                    attackManager.GetAttack().Execute(this.gameObject);
                 }
             }
             hasMovedThisBeat = true;
@@ -84,5 +111,18 @@ public class EnemyController : MonoBehaviour
         {
             return false;
         }
+    }
+    public void Attack(bool[,] attackGrid, int damage)
+    {
+        if (BeatTrigger.canBePressed == true)
+        {
+            unitAttack.Attack(attackGrid, lastDirection, attackMarker, damage);
+        }
+    }
+
+    public bool Rotate(Vector2 direction)
+    {
+        lastDirection = direction;
+        return movement.Rotate(direction);
     }
 }

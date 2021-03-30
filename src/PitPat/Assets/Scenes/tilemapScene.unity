@@ -4885,6 +4885,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitType: 0
+  attackTypes: 
+--- !u!61 &1555760147
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555760140}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1610643055
 GameObject:
   m_ObjectHideFlags: 0
@@ -4999,6 +5026,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ca3468d2e62344683cd88c40fd41be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1952293316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952293310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3786eaad3e15334468dcdb1f692a03be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitType: 0
+  attackTypes: 00000000
 --- !u!1 &2043763429
 GameObject:
   m_ObjectHideFlags: 0
@@ -5109,6 +5150,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8347156568882130844, guid: 1ada583718bbf114694891de260fc1b2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8347156568882130845, guid: 1ada583718bbf114694891de260fc1b2,
         type: 3}
       propertyPath: groundTilemap
@@ -5130,6 +5176,11 @@ PrefabInstance:
       propertyPath: markerHolder
       value: 
       objectReference: {fileID: 2043763429}
+    - target: {fileID: 8347156568882130845, guid: 1ada583718bbf114694891de260fc1b2,
+        type: 3}
+      propertyPath: maxHealth
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ada583718bbf114694891de260fc1b2, type: 3}
 --- !u!1001 &9101231248644077238
@@ -5214,5 +5265,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1555760140}
+    - target: {fileID: 9101231249518810999, guid: e7c27cafb7c0ff74ebcc6ced58f2e388,
+        type: 3}
+      propertyPath: attackMarker
+      value: 
+      objectReference: {fileID: 5010222623209261962, guid: 18cb7835b3e4ce14b8fbc32b0add2339,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7c27cafb7c0ff74ebcc6ced58f2e388, type: 3}

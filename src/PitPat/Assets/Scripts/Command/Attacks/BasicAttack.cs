@@ -16,12 +16,17 @@ public class BasicAttack : Attack
     public override void Execute(GameObject go)
     {
         //Different Game Components may move differently check if the go is a CommandPacMan
-        var target = go.GetComponent<PlayerController>();
-        if (target is PlayerController)
+        if(go.GetComponent<PlayerController>()!=null)
         {
-            target.Attack(attackedSpaces,damage);
-            base.Execute(go);
+            var target = go.GetComponent<PlayerController>();
+            target.Attack(attackedSpaces, damage);
         }
+        else if(go.GetComponent<EnemyController>() != null)
+        {
+            var target = go.GetComponent<EnemyController>();
+            target.Attack(attackedSpaces, damage);
+        }
+        base.Execute(go);
     }
 
     /// <summary>
