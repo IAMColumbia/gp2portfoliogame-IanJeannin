@@ -9,9 +9,32 @@ public class PlayerController : MonoBehaviour
     private Tilemap groundTilemap;
     [SerializeField]
     private Tilemap collisionTilemap;
+    [SerializeField]
+    private GameObject attackMarker;
+    [Tooltip("The empty game object that will hold the instantiated attack markers")]
+    [SerializeField]
+    private GameObject markerHolder;
 
-    private Vector3 lastDirection;
+    //Player starts the game looking down
+    private Vector3 lastDirection=new Vector3(0,-1,0);
 
+    private UnitAttack unitAttack;
+
+    private void Start()
+    {
+        unitAttack=this.gameObject.AddComponent<UnitAttack>();
+        unitAttack.Initialize(this.gameObject,markerHolder);
+    }
+    
+    private void Update()
+    {
+        if(BeatTrigger.beatEntered)
+        {
+            BeatTrigger.beatEntered = false;
+            unitAttack.RemoveMarkers();
+        }
+    }
+    
     /// <summary>
     /// Recieves an attack grid. 
     /// NOTE: AttackGrid must be [7,7]
@@ -19,33 +42,9 @@ public class PlayerController : MonoBehaviour
     /// <param name="attackGrid"></param>
     public void Attack(bool[,] attackGrid)
     {
-        Vector3 targetedSpace = transform.position;
-        //Simulates rotation of the grid according to player direction
-        bool xPositiveTowardsPlayer = false;
-        bool yPositiveTowardsPlayer = false;
-        if (lastDirection==new Vector3(0,1,0))
+        if(BeatTrigger.canBePressed==true)
         {
-            targetedSpace.x = targetedSpace.x - 3;
-            targetedSpace.y = targetedSpace.y + 3;
-            transform.position = (Vector3)targetedSpace;
-        }
-        else if(lastDirection==new Vector3(1,0,0))
-        {
-            targetedSpace.x = targetedSpace.x + 3;
-            targetedSpace.y = targetedSpace.y + 3;
-            transform.position = (Vector3)targetedSpace;
-        }
-        else if (lastDirection == new Vector3(0, -1, 0))
-        {
-            targetedSpace.x = targetedSpace.x + 3;
-            targetedSpace.y = targetedSpace.y - 3;
-            transform.position = (Vector3)targetedSpace;
-        }
-        else if (lastDirection == new Vector3(-1, 0, 0))
-        {
-            targetedSpace.x = targetedSpace.x - 3;
-            targetedSpace.y = targetedSpace.y - 3;
-            transform.position = (Vector3)targetedSpace;
+            unitAttack.Attack(attackGrid, lastDirection, attackMarker);
         }
     }
 

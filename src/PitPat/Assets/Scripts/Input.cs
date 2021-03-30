@@ -48,8 +48,14 @@ public class Input : MonoBehaviour
 
     private void AttackCommand()
     {
-        Command newCommand = new Attack();
-        newCommand.Execute(CommandTarget);
+        if(CommandTarget.GetComponent<AttackManager>())
+        {
+            CommandTarget.GetComponent<AttackManager>().GetAttack().Execute(CommandTarget);
+        }
+        //Command attack = AttackManager.GetAttack();
+        //attack.Execute(CommandTarget);
+        //Command newCommand = new Attack();
+        //newCommand.Execute(CommandTarget);
     }
 
 }
