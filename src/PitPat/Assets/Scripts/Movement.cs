@@ -17,7 +17,7 @@ public class Movement : MonoBehaviour
     }
     public bool Move(Vector2 direction)
     {
-        if (BeatTrigger.canBePressed && CanMove(direction))
+        if (CanMove(direction))
         {
             transform.position += (Vector3)direction;
             Rotate(direction);
@@ -32,7 +32,7 @@ public class Movement : MonoBehaviour
 
     private bool CanMove(Vector2 direction)
     {
-        LayerMask mask = LayerMask.GetMask("Enemies");
+        LayerMask mask = LayerMask.GetMask("Enemies","Player");
         Vector2 worldDesination = ((Vector2)transform.position + direction);
         Vector3Int gridDestination = groundTilemap.WorldToCell(transform.position + (Vector3)direction);
         if (!groundTilemap.HasTile(gridDestination) || collisionTilemap.HasTile(gridDestination) || Physics2D.OverlapCircle(worldDesination, 0.05f, mask))
@@ -47,16 +47,9 @@ public class Movement : MonoBehaviour
 
     public bool Rotate(Vector2 direction)
     {
-        if (BeatTrigger.canBePressed)
-        {
             lastDirection = direction;
             this.gameObject.GetComponent<Animator>().SetFloat("xDir", lastDirection.x);
             this.gameObject.GetComponent<Animator>().SetFloat("yDir", lastDirection.y);
             return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 }

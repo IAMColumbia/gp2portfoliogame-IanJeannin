@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     private UnitProfile unitProfile;
     private Movement movement;
 
+    private bool beatHit = false;
+
     private void Start()
     {
         unitAttack=this.gameObject.AddComponent<UnitAttack>();
@@ -41,6 +43,10 @@ public class PlayerController : MonoBehaviour
             BeatTrigger.beatEntered = false;
             unitAttack.RemoveMarkers();
         }
+        if(BeatTrigger.canBePressed==false)
+        {
+            beatHit = false;
+        }
     }
     
     /// <summary>
@@ -50,19 +56,37 @@ public class PlayerController : MonoBehaviour
     /// <param name="attackGrid"></param>
     public void Attack(bool[,] attackGrid,int damage)
     {
-        if(BeatTrigger.canBePressed==true)
+        if(BeatTrigger.canBePressed==true && beatHit == false)
         {
+            beatHit = true;
             unitAttack.Attack(attackGrid, lastDirection, attackMarker,damage);
         }
     }
     public bool Move(Vector2 direction)
     {
-        return movement.Move(direction);
+        if(BeatTrigger.canBePressed && beatHit == false)
+        {
+            beatHit = true;
+            lastDirection = direction;
+            return movement.Move(direction);
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool Rotate(Vector2 direction)
     {
-        lastDirection = direction;
-        return movement.Rotate(direction);
+        if (BeatTrigger.canBePressed&&beatHit==false)
+        {
+            beatHit = true;
+            lastDirection = direction;
+            return movement.Rotate(direction);
+        }
+        else
+        {
+            return false;
+        }
     }
 }

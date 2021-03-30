@@ -65,6 +65,7 @@ public class EnemyController : MonoBehaviour
     {
         if(BeatTrigger.canBePressed==true&&hasMovedThisBeat==false)
         {
+            hasMovedThisBeat = true;
             float successChance = Random.Range(0, 100);
             float successMarker = maxSuccessChance - failureChance;
             if(successMarker<minSuccessChance)
@@ -88,7 +89,6 @@ public class EnemyController : MonoBehaviour
                     attackManager.GetAttack().Execute(this.gameObject);
                 }
             }
-            hasMovedThisBeat = true;
         }
         else if(BeatTrigger.canBePressed==false&&hasMovedThisBeat==true)
         {
@@ -114,10 +114,7 @@ public class EnemyController : MonoBehaviour
     }
     public void Attack(bool[,] attackGrid, int damage)
     {
-        if (BeatTrigger.canBePressed == true)
-        {
             unitAttack.Attack(attackGrid, lastDirection, attackMarker, damage);
-        }
     }
 
     public bool Rotate(Vector2 direction)
