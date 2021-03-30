@@ -19,11 +19,14 @@ public class PlayerController : MonoBehaviour
     private Vector3 lastDirection=new Vector3(0,-1,0);
 
     private UnitAttack unitAttack;
+    private UnitProfile unitProfile;
 
     private void Start()
     {
         unitAttack=this.gameObject.AddComponent<UnitAttack>();
         unitAttack.Initialize(this.gameObject,markerHolder);
+        unitProfile = this.gameObject.AddComponent<UnitProfile>();
+        unitProfile.Initialize(10);
     }
     
     private void Update()
@@ -53,12 +56,12 @@ public class PlayerController : MonoBehaviour
         if(BeatTrigger.canBePressed&&CanMove(direction))
         {
             transform.position += (Vector3)direction;
-            lastDirection = direction;
+            Rotate(direction);
             return true;
         }
         else
         {
-            lastDirection = direction;
+            Rotate(direction);
             return false;
         }
     }
@@ -81,6 +84,8 @@ public class PlayerController : MonoBehaviour
         if(BeatTrigger.canBePressed)
         { 
             lastDirection = direction;
+            this.gameObject.GetComponent<Animator>().SetFloat("xDir", lastDirection.x);
+            this.gameObject.GetComponent<Animator>().SetFloat("yDir", lastDirection.y);
             return true;
         }
         else
