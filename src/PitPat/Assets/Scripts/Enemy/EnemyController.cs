@@ -66,38 +66,45 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        if(BeatTrigger.canBePressed==true&&hasMovedThisBeat==false)
+        if(GameState.stateOfGame==GameState.StateOfGame.Menu)
         {
-            hasMovedThisBeat = true;
-            float successChance = Random.Range(0, 100);
-            float successMarker = maxSuccessChance - failureChance;
-            // If the random is within the success range
-            if (successChance<= successMarker)
-            {
-                if (IsAdjacentToPlayer() == false)
-                {
-                    SetMovementVector();
-                }
-                else if(this.transform.position+lastDirection!=player.transform.position)
-                {
-                    Vector2 lookDirection = player.transform.position - this.transform.position;
-                    Rotate(lookDirection);
-                }
-                else
-                {
-                    attackManager.GetAttack().Execute(this.gameObject);
-                }
-            }
-            if(BeatTrigger.beatsCounter==10)
-            {
-                //Every missed beat gives the AI a 7.5% greater chance of failure.
-                //Because this is checked every 10 beats, there is a min
-                failureChance = maxSuccessChance - ((BeatTrigger.beatsCounter - BeatTrigger.beatsHit)*missedBeatWeight);
-            }
+
         }
-        else if(BeatTrigger.canBePressed==false&&hasMovedThisBeat==true)
+        else
         {
-            hasMovedThisBeat = false;
+            if (BeatTrigger.canBePressed == true && hasMovedThisBeat == false)
+            {
+                hasMovedThisBeat = true;
+                float successChance = Random.Range(0, 100);
+                float successMarker = maxSuccessChance - failureChance;
+                // If the random is within the success range
+                if (successChance <= successMarker)
+                {
+                    if (IsAdjacentToPlayer() == false)
+                    {
+                        SetMovementVector();
+                    }
+                    else if (this.transform.position + lastDirection != player.transform.position)
+                    {
+                        Vector2 lookDirection = player.transform.position - this.transform.position;
+                        Rotate(lookDirection);
+                    }
+                    else
+                    {
+                        attackManager.GetAttack().Execute(this.gameObject);
+                    }
+                }
+                if (BeatTrigger.beatsCounter == 10)
+                {
+                    //Every missed beat gives the AI a 7.5% greater chance of failure.
+                    //Because this is checked every 10 beats, there is a min
+                    //failureChance = maxSuccessChance - ((BeatTrigger.beatsCounter - BeatTrigger.beatsHit) * missedBeatWeight);
+                }
+            }
+            else if (BeatTrigger.canBePressed == false && hasMovedThisBeat == true)
+            {
+                hasMovedThisBeat = false;
+            }
         }
     }
 

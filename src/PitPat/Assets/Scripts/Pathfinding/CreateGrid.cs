@@ -241,7 +241,7 @@ public class CreateGrid : MonoBehaviour
                         foundTileOnLastPass = true;
                         node.name = "Unwalkable_" + gridX.ToString() + "_" + gridY.ToString();
                         wt.walkable = false;
-                        node.GetComponent<SpriteRenderer>().color = Color.red;
+                        //node.GetComponent<SpriteRenderer>().color = Color.red;
                     }
 
                     unsortedNodes.Add(node);

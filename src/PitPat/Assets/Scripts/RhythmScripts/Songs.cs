@@ -72,4 +72,10 @@ public class Songs : MonoBehaviour
         bgmSource.clip = song.GetSong();
         bgmSource.Play();
     }
+
+    public void ToggleMute()
+    {
+        bgmSource.mute = !bgmSource.mute;
+
+    }
 }

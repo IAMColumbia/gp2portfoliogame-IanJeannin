@@ -31,19 +31,19 @@ public class BeatSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(delay>0)
-        {
-            delay -= Time.deltaTime;
-        }
-        else
-        {
-            timer += Time.deltaTime;
-            if (timer >= (60f / bpm))
+            if (delay > 0)
             {
-                //Create the note
-                ((GameObject)Instantiate(note, this.transform.position, Quaternion.identity)).GetComponent<Transform>().parent = GetComponent<Transform>();
-                timer -= (60f / bpm);
+                delay -= Time.deltaTime;
             }
-        }
+            else
+            {
+                timer += Time.deltaTime;
+                if (timer >= (60f / bpm))
+                {
+                    //Create the note
+                    ((GameObject)Instantiate(note, this.transform.position, Quaternion.identity)).GetComponent<Transform>().parent = GetComponent<Transform>();
+                    timer -= (60f / bpm);
+                }
+            }
     }
 }

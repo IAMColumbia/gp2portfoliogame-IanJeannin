@@ -38,14 +38,21 @@ public class PlayerController : MonoBehaviour
     
     private void Update()
     {
-        if(BeatTrigger.beatEntered)
+        if (GameState.stateOfGame == GameState.StateOfGame.Menu)
         {
-            BeatTrigger.beatEntered = false;
-            unitAttack.RemoveMarkers();
+
         }
-        if(BeatTrigger.canBePressed==false)
+        else
         {
-            beatHit = false;
+            if (BeatTrigger.beatEntered)
+            {
+                BeatTrigger.beatEntered = false;
+                unitAttack.RemoveMarkers();
+            }
+            if (BeatTrigger.canBePressed == false)
+            {
+                beatHit = false;
+            }
         }
     }
     

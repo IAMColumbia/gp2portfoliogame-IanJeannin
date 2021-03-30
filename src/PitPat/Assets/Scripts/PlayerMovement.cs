@@ -41,6 +41,22 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Mute"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd617364-6f4d-4901-a07b-9be41a923cb4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Quit"",
+                    ""type"": ""Button"",
+                    ""id"": ""bb23e60c-0a96-411b-ac2f-502b2a536e84"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -164,6 +180,28 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
                     ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c0a545b-74b3-4687-9c3c-879d5cf39cb8"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mute"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""628e4e3a-962c-4591-a392-6320b4bf1900"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -175,6 +213,8 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
         m_Main_Movement = m_Main.FindAction("Movement", throwIfNotFound: true);
         m_Main_Attack = m_Main.FindAction("Attack", throwIfNotFound: true);
         m_Main_Rotate = m_Main.FindAction("Rotate", throwIfNotFound: true);
+        m_Main_Mute = m_Main.FindAction("Mute", throwIfNotFound: true);
+        m_Main_Quit = m_Main.FindAction("Quit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -227,6 +267,8 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
     private readonly InputAction m_Main_Movement;
     private readonly InputAction m_Main_Attack;
     private readonly InputAction m_Main_Rotate;
+    private readonly InputAction m_Main_Mute;
+    private readonly InputAction m_Main_Quit;
     public struct MainActions
     {
         private @PlayerMovement m_Wrapper;
@@ -234,6 +276,8 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Main_Movement;
         public InputAction @Attack => m_Wrapper.m_Main_Attack;
         public InputAction @Rotate => m_Wrapper.m_Main_Rotate;
+        public InputAction @Mute => m_Wrapper.m_Main_Mute;
+        public InputAction @Quit => m_Wrapper.m_Main_Quit;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -252,6 +296,12 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
                 @Rotate.started -= m_Wrapper.m_MainActionsCallbackInterface.OnRotate;
                 @Rotate.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnRotate;
                 @Rotate.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnRotate;
+                @Mute.started -= m_Wrapper.m_MainActionsCallbackInterface.OnMute;
+                @Mute.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnMute;
+                @Mute.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnMute;
+                @Quit.started -= m_Wrapper.m_MainActionsCallbackInterface.OnQuit;
+                @Quit.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnQuit;
+                @Quit.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnQuit;
             }
             m_Wrapper.m_MainActionsCallbackInterface = instance;
             if (instance != null)
@@ -265,6 +315,12 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
                 @Rotate.started += instance.OnRotate;
                 @Rotate.performed += instance.OnRotate;
                 @Rotate.canceled += instance.OnRotate;
+                @Mute.started += instance.OnMute;
+                @Mute.performed += instance.OnMute;
+                @Mute.canceled += instance.OnMute;
+                @Quit.started += instance.OnQuit;
+                @Quit.performed += instance.OnQuit;
+                @Quit.canceled += instance.OnQuit;
             }
         }
     }
@@ -274,5 +330,7 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
+        void OnMute(InputAction.CallbackContext context);
+        void OnQuit(InputAction.CallbackContext context);
     }
 }
