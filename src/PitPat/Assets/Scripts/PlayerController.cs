@@ -43,11 +43,11 @@ public class PlayerController : MonoBehaviour
     /// NOTE: AttackGrid must be [7,7]
     /// </summary>
     /// <param name="attackGrid"></param>
-    public void Attack(bool[,] attackGrid)
+    public void Attack(bool[,] attackGrid,int damage)
     {
         if(BeatTrigger.canBePressed==true)
         {
-            unitAttack.Attack(attackGrid, lastDirection, attackMarker);
+            unitAttack.Attack(attackGrid, lastDirection, attackMarker,damage);
         }
     }
 
@@ -68,8 +68,10 @@ public class PlayerController : MonoBehaviour
 
     private bool CanMove(Vector2 direction)
     {
+        LayerMask mask = LayerMask.GetMask("Enemies");
+        Vector2 worldDesination=((Vector2)transform.position+direction);
         Vector3Int gridDestination = groundTilemap.WorldToCell(transform.position + (Vector3)direction);
-        if(!groundTilemap.HasTile(gridDestination)||collisionTilemap.HasTile(gridDestination))
+        if (!groundTilemap.HasTile(gridDestination)||collisionTilemap.HasTile(gridDestination)|| Physics2D.OverlapCircle(worldDesination, 0.05f,mask))
         {
             return false;
         }

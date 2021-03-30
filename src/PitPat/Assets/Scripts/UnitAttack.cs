@@ -15,7 +15,7 @@ public class UnitAttack: MonoBehaviour
         markerHolder = attackMarkerHolder;
     }
 
-    public void Attack(bool[,] attackGrid,Vector3 lastDirection, GameObject attackMarker)
+    public void Attack(bool[,] attackGrid,Vector3 lastDirection, GameObject attackMarker,int damage)
     {
         //The space that the first index of the attackGrid aligns to. 
         Vector3 targetedSpace = attackingObject.transform.position;
@@ -70,7 +70,17 @@ public class UnitAttack: MonoBehaviour
             {
                 if (attackGrid[row, col] == true)
                 {
+                    Collider2D [] enemyColliders=new Collider2D[1];
                     //TODO: AttackTile
+                    LayerMask mask = LayerMask.GetMask("Enemies");
+                    ContactFilter2D filter = new ContactFilter2D();
+                    filter.layerMask = mask;
+                    Physics2D.OverlapCircle(targetedSpace, 0.05f, filter, enemyColliders);
+                    if (enemyColliders[0]==true)
+                    {
+                        enemyColliders[0].gameObject.GetComponent<UnitProfile>().ChangeHealth(-damage);
+                        Debug.Log("Health: " + enemyColliders[0].gameObject.GetComponent<UnitProfile>().GetHealth());
+                    }
                     Instantiate(attackMarker, targetedSpace, Quaternion.identity, markerHolder.transform);
                 }
                 if (rowIsX)

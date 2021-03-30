@@ -5,11 +5,13 @@ using UnityEngine;
 public class BasicAttack : Attack
 {
     private bool[,] attackedSpaces;
+    private int damage;
     public BasicAttack() : base()
     {
         this.commandName = "Basic Attack";
         attackedSpaces = new bool[7, 7];
         attackedSpaces = SetUpAttackGrid();
+        damage = 1;
     }
     public override void Execute(GameObject go)
     {
@@ -17,7 +19,7 @@ public class BasicAttack : Attack
         var target = go.GetComponent<PlayerController>();
         if (target is PlayerController)
         {
-            target.Attack(attackedSpaces);
+            target.Attack(attackedSpaces,damage);
             base.Execute(go);
         }
     }

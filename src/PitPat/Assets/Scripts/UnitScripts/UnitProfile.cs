@@ -5,7 +5,7 @@ using UnityEngine;
 public class UnitProfile : MonoBehaviour
 {
     private int maxHealth;
-    private static int currentHealth;
+    private int currentHealth;
 
     public void Initialize(int startingHealth)
     {
@@ -24,6 +24,11 @@ public class UnitProfile : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public int GetHealth()
+    {
+        return currentHealth;
     }
 
 }
