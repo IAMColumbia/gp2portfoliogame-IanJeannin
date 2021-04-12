@@ -1,0 +1,15 @@
+Release Notes version 1 POC
+
+Basic Protoype:
+	- Grid Movement
+	- Beat Manager (Currently based on manual BPM selection)
+	- A* Pathfinding
+	- Multiple Attack Functionality (Only basic attack is currently active)
+
+Improvements to Make:
+	- Make automatic beat/bpm identifier
+	- Correct enemy walking into obstacles every now and then
+	- Check bpm spawner, seems slightly off? 
+	- Add Turn Management
+	- Add more complex AI miss-beat formula that corrects itself with every beat rather than every 10 beats
+	- Add menus
