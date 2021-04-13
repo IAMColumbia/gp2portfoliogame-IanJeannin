@@ -68,7 +68,7 @@ public class UnitAttack: MonoBehaviour
         {
             for (int col = 0; col < 7; col++)
             {
-                if (attackGrid[row, col] >=0)
+                if (attackGrid[row, col] >0)
                 {
                     Collider2D [] enemyColliders=new Collider2D[1];
                     //TODO: AttackTile

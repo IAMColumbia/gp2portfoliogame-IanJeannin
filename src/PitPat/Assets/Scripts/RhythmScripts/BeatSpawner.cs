@@ -72,7 +72,7 @@ public class BeatSpawner : MonoBehaviour
             // The center of the arc
             Vector3 center = beatLane.transform.position;
             // move the center a bit downwards to make the arc vertical
-            center -= new Vector3(0, 0.5f, 0);
+            center -= new Vector3(0, 0.1f, 0);
 
             // Interpolate over the arc relative to center
             Vector3 riseRelCenter = (Vector3)lerpStartPosition - center;

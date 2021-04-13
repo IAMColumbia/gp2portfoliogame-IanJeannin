@@ -21,7 +21,7 @@ public class CreateGrid : MonoBehaviour
     private List<GameObject> unsortedNodes=new List<GameObject>();   // all nodes
     public GameObject[,] nodes;           // sorted 2d array of nodes
     public int gridBoundX = 0, gridBoundY = 0;
-    void Start()
+    void Awake()
     {
         gridSizeX = Mathf.Abs(scanStartX) + Mathf.Abs(scanFinishX);
         gridSizeY = Mathf.Abs(scanStartY) + Mathf.Abs(scanFinishY);

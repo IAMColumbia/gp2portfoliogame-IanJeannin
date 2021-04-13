@@ -139,4 +139,60 @@ public class Pathfinding : MonoBehaviour
         }
         return new Vector2(0, 0);
     }
+
+    public static Vector3 GetRandomTilePosition()
+    {
+        Vector3 targetPosition = new Vector3(0, 0);
+        bool positionIsValid = false;
+        bool spacesAreOpen = false;
+        for (int x = 0; x < gridBoundX; x++)
+        {
+            for (int y = 0; y < gridBoundY; y++)
+            {
+                if (nodes[x, y] != null)
+                {
+                    WorldTile wt = nodes[x, y].GetComponent<WorldTile>();
+
+                    // we are interested in walkable cells only
+                    if (wt.walkable)
+                    {
+                        Collider2D[] enemyColliders = new Collider2D[1];
+                        LayerMask mask = LayerMask.GetMask("Enemies", "Player");
+                        ContactFilter2D filter = new ContactFilter2D();
+                        filter.layerMask = mask;
+                        Physics2D.OverlapCircle(wt.transform.position, 0.05f, filter, enemyColliders);
+                        if (enemyColliders[0] == false)
+                        {
+                            spacesAreOpen = true;
+                        }
+                    }
+                }
+            }
+        }
+        if(spacesAreOpen==true)
+        {
+            while (positionIsValid == false)
+            {
+                int randomX = Random.Range(0, gridBoundX);
+                int randomY = Random.Range(0, gridBoundY);
+                WorldTile _wt = nodes[randomX, randomY].GetComponent<WorldTile>();
+
+                if (_wt.walkable)
+                {
+                    Collider2D[] enemyColliders = new Collider2D[1];
+                    LayerMask mask = LayerMask.GetMask("Enemies", "Player");
+                    ContactFilter2D filter = new ContactFilter2D();
+                    filter.layerMask = mask;
+                    Physics2D.OverlapCircle(_wt.transform.position, 0.05f, filter, enemyColliders);
+                    if (enemyColliders[0] == false)
+                    {
+                        targetPosition = _wt.transform.position;
+                        positionIsValid = true;
+                    }
+                }
+            }
+        }
+        return targetPosition;
+       
+    }
 }

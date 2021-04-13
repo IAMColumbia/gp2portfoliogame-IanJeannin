@@ -38,7 +38,7 @@ public class Menu : MonoBehaviour
         if (GameState.stateOfGame == GameState.StateOfGame.Menu)
         {
         }
-        GameState.stateOfGame = GameState.StateOfGame.Play;
+        //GameState.stateOfGame = GameState.StateOfGame.Play;
         Time.timeScale = 1;
         Songs.PlaySong(Songs.GetRandomSong());
     }
