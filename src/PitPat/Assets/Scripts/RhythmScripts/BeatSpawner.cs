@@ -53,7 +53,11 @@ public class BeatSpawner : MonoBehaviour
         lerpStartPosition.x=lerpStartPosition.x+beatLane.GetComponent<Renderer>().bounds.size.x / 2;
         lerpEndPosition.x = lerpEndPosition.x - beatLane.GetComponent<Renderer>().bounds.size.x / 2;
         beat=Instantiate(beatMarker, lerpStartPosition, Quaternion.identity);
-        ((GameObject)Instantiate(beatMarker, lerpStartPosition, Quaternion.identity)).GetComponent<Transform>().parent = GetComponent<Transform>();
+        GameObject leftMarker = Instantiate(beatMarker, lerpEndPosition, Quaternion.identity);
+        GameObject rightMarker = Instantiate(beatMarker, lerpStartPosition, Quaternion.identity);
+        beat.GetComponent<SpriteRenderer>().sortingLayerName = "Rhythm";
+        leftMarker.GetComponent<SpriteRenderer>().sortingLayerName = "Rhythm";
+        rightMarker.GetComponent<SpriteRenderer>().sortingLayerName = "Rhythm";
         ((GameObject)Instantiate(beatMarker, lerpEndPosition, Quaternion.identity)).GetComponent<Transform>().parent = GetComponent<Transform>();
     }
 

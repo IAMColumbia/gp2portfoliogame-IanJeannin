@@ -1,1 +1,19 @@
 Release Notes version 2 Vertical Slice
+
+Improvements Made:
+	- Refactored beats to be based on a timer rather than collision
+	- Changed visual of beats to be akin to a metronome
+	- Add basic menus
+	- Changed attack grid values to floats, so damage can be adjusted per square
+	- Add enemy spawner, with decreased spawn times as player kills enemies
+	- Add resetting upon player death
+	- Add brief input lock if player presses input inaccurately
+	- Adjust AI movement to occur between player beats. This allows the player more reaction time.
+
+Improvements to Make:
+	- Check timer accuracy? 
+	- Fix metronome bug where it only sometimes switches directions (could be due to timer inaccuracy)
+	- Correct enemy walking into obstacles every now and then (Pathfinding innacurate only in some areas?)
+	- Add Turn Management
+	- Adjust AI mistake formula
+	- Improve menus
