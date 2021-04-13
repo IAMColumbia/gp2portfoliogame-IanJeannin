@@ -29,9 +29,9 @@ public class UnitProfile : MonoBehaviour
                 EnemyManager.ClearEnemies();
                 this.gameObject.GetComponent<PlayerController>().Reset();
             }
-            else
+            else if(this.gameObject.GetComponent<EnemyController>())
             {
-                Destroy(this.gameObject);
+                EnemyManager.KillEnemy(gameObject);
             }
         }
     }

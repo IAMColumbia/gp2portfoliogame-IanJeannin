@@ -13,6 +13,7 @@ public class EnemyManager : MonoBehaviour
     private static List<GameObject> enemies=new List<GameObject>();
     private float beatCounter = 0;
     private bool hasBeenPressed;
+    private static int enemiesKilled = 0;
 
     private void Start()
     {
@@ -56,5 +57,12 @@ public class EnemyManager : MonoBehaviour
         {
             Destroy(enemy);
         }
+    }
+
+    public static void KillEnemy(GameObject enemy)
+    {
+        enemies.Remove(enemy);
+        enemiesKilled++;
+        Destroy(enemy);
     }
 }
