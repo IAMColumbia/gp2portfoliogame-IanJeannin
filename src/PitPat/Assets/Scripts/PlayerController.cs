@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
     
     private void Update()
     {
-        if (GameState.stateOfGame == GameState.StateOfGame.Menu)
+        if (GameState.stateOfGame == GameState.StateOfGame.Menu||GameState.stateOfGame==GameState.StateOfGame.Pause)
         {
 
         }

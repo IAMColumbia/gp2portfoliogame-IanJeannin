@@ -13,6 +13,12 @@ public class Input : MonoBehaviour
     public GameObject CommandTarget;
     public GameObject audioManager=null;
 
+    [Tooltip("How long before the player can attempt another input. ")]
+    [SerializeField]
+    private float inputLockTime=0.5f;
+
+    float timer;
+    private bool inputBlock=false;
 
     private void Awake()
     {
@@ -40,44 +46,41 @@ public class Input : MonoBehaviour
 
     private void MoveCommand(Vector2 direction)
     {
-        if(GameState.stateOfGame==GameState.StateOfGame.Menu)
+        if (GameState.stateOfGame == GameState.StateOfGame.Pause)
         {
             GameState.stateOfGame = GameState.StateOfGame.Play;
-
-            Command newCommand = new Move();
-            newCommand.Execute(CommandTarget, direction);
         }
-        else
+        if(GameState.stateOfGame==GameState.StateOfGame.Play&&inputBlock==false)
         {
             Command newCommand = new Move();
             newCommand.Execute(CommandTarget, direction);
+            LockInput();
         }
     }
     private void RotateCommand(Vector2 direction)
     {
-        if (GameState.stateOfGame == GameState.StateOfGame.Menu)
+        if (GameState.stateOfGame == GameState.StateOfGame.Pause)
         {
             GameState.stateOfGame = GameState.StateOfGame.Play;
         }
-        else
+        if(GameState.stateOfGame==GameState.StateOfGame.Play&&inputBlock==false)
         {
             Command newCommand = new Rotate();
             newCommand.Execute(CommandTarget, direction);
+            LockInput();
         }
     }
 
     private void AttackCommand()
     {
-        if (GameState.stateOfGame == GameState.StateOfGame.Menu)
+        if (GameState.stateOfGame == GameState.StateOfGame.Pause)
         {
             GameState.stateOfGame = GameState.StateOfGame.Play;
         }
-        else
+        if (GameState.stateOfGame==GameState.StateOfGame.Play && CommandTarget.GetComponent<AttackManager>()&&inputBlock==false)
         {
-            if (CommandTarget.GetComponent<AttackManager>())
-            {
-                CommandTarget.GetComponent<AttackManager>().GetAttack().Execute(CommandTarget);
-            }
+            CommandTarget.GetComponent<AttackManager>().GetAttack().Execute(CommandTarget);
+            LockInput();
         }
         //Command attack = AttackManager.GetAttack();
         //attack.Execute(CommandTarget);
@@ -96,5 +99,34 @@ public class Input : MonoBehaviour
     private void Quit()
     {
         Application.Quit();
+    }
+
+    public IEnumerator InputDelay()
+    {
+        inputBlock = true;
+        yield return new WaitForSeconds(inputLockTime);
+        inputBlock = false;
+    }
+
+    public void LockInput()
+    {
+        if(BeatSpawner.canBePressed==false)
+        {
+            inputBlock = true;
+            timer -= timer;
+        }
+    }
+
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if(inputBlock==true)
+        {
+            if(timer>=inputLockTime)
+            {
+                timer -= timer;
+                inputBlock = false;
+            }
+        }
     }
 }

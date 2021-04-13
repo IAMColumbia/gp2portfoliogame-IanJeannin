@@ -21,7 +21,7 @@ public class Menu : MonoBehaviour
 
     public void PauseGame()
     {
-        GameState.stateOfGame = GameState.StateOfGame.Menu;
+        GameState.stateOfGame = GameState.StateOfGame.Pause;
         //menuPanel.SetActive(true);
         Time.timeScale = 0;
     }
@@ -35,10 +35,7 @@ public class Menu : MonoBehaviour
     public void PlayGame()
     {
         menuPanel.SetActive(false);
-        if (GameState.stateOfGame == GameState.StateOfGame.Menu)
-        {
-        }
-        //GameState.stateOfGame = GameState.StateOfGame.Play;
+        GameState.stateOfGame = GameState.StateOfGame.Pause;
         Time.timeScale = 1;
         Songs.PlaySong(Songs.GetRandomSong());
     }
