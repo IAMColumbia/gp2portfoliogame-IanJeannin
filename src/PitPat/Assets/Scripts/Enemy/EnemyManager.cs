@@ -8,16 +8,21 @@ public class EnemyManager : MonoBehaviour
     private List<GameObject> enemyTypes;
     [Tooltip("How many beats before a new enemy spawns.")]
     [SerializeField]
-    private int beatsBeforeSpawn = 10;
+    private int startingBeatsBeforeSpawn = 10;
 
     private static List<GameObject> enemies=new List<GameObject>();
     private float beatCounter = 0;
     private bool hasBeenPressed;
     public static int enemiesKilled = 0;
 
+    private static int beatsBeforeSpawn;
+    private static int defaultBeatsBeforeSpawn; //Convert the serialized into a static
+
     private void Start()
     {
         SpawnEnemy();
+        beatsBeforeSpawn=startingBeatsBeforeSpawn;
+        defaultBeatsBeforeSpawn = startingBeatsBeforeSpawn;
     }
 
     public void SpawnEnemy()
@@ -34,7 +39,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (GameState.stateOfGame == GameState.StateOfGame.Play)
         {
-            if (BeatSpawner.aiCanMove==true)
+            if (BeatSpawner.canBePressed == true && hasBeenPressed == false)
             {
                 beatCounter++;
                 if (beatCounter >= beatsBeforeSpawn)
@@ -42,7 +47,11 @@ public class EnemyManager : MonoBehaviour
                     beatCounter = 0;
                     SpawnEnemy();
                 }
-                BeatSpawner.aiCanMove = false;
+                hasBeenPressed = true;
+            }
+            else if (BeatSpawner.canBePressed == false && hasBeenPressed == true)
+            {
+                hasBeenPressed = false;
             }
         }    
     }
@@ -53,6 +62,8 @@ public class EnemyManager : MonoBehaviour
         {
             Destroy(enemy);
         }
+        enemiesKilled = 0;
+        beatsBeforeSpawn = defaultBeatsBeforeSpawn;
     }
 
     public static void KillEnemy(GameObject enemy)
@@ -60,5 +71,10 @@ public class EnemyManager : MonoBehaviour
         enemies.Remove(enemy);
         enemiesKilled++;
         Destroy(enemy);
+        if(enemiesKilled/4==1&&beatsBeforeSpawn>4)
+        {
+            beatsBeforeSpawn--;
+        }
+
     }
 }
