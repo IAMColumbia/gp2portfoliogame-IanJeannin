@@ -65,13 +65,9 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        if(GameState.stateOfGame==GameState.StateOfGame.Menu)
+        if(GameState.stateOfGame==GameState.StateOfGame.Play)
         {
-
-        }
-        else
-        {
-            if (BeatSpawner.canBePressed == true && hasMovedThisBeat == false)
+            if (BeatSpawner.aiCanMove==true)
             {
                 hasMovedThisBeat = true;
                 float successChance = Random.Range(0, 100);
@@ -99,10 +95,7 @@ public class EnemyController : MonoBehaviour
                     //Because this is checked every 10 beats, there is a min
                     //failureChance = maxSuccessChance - ((BeatTrigger.beatsCounter - BeatTrigger.beatsHit) * missedBeatWeight);
                 }
-            }
-            else if (BeatSpawner.canBePressed == false && hasMovedThisBeat == true)
-            {
-                hasMovedThisBeat = false;
+                BeatSpawner.aiCanMove = false;
             }
         }
     }

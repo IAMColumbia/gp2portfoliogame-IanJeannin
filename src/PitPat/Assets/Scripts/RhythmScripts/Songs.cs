@@ -11,7 +11,7 @@ public class Songs : MonoBehaviour
     [Tooltip("How many seconds the beat is off center")]
     [SerializeField]
     private List<float> beatDelay;
-    [SerializeField]
+
     private static AudioSource bgmSource;
 
     public static List<Song> songsList=new List<Song>();
@@ -42,6 +42,7 @@ public class Songs : MonoBehaviour
         if(bgmSource==null)
         {
             bgmSource=this.gameObject.AddComponent<AudioSource>();
+            bgmSource.volume = 0.6f;
         }
         bgmSource.loop = true;
     }

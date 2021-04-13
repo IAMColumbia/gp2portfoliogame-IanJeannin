@@ -34,7 +34,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (GameState.stateOfGame == GameState.StateOfGame.Play)
         {
-            if (BeatSpawner.canBePressed == true && hasBeenPressed == false)
+            if (BeatSpawner.aiCanMove==true)
             {
                 beatCounter++;
                 if (beatCounter >= beatsBeforeSpawn)
@@ -42,11 +42,7 @@ public class EnemyManager : MonoBehaviour
                     beatCounter = 0;
                     SpawnEnemy();
                 }
-                hasBeenPressed = true;
-            }
-            else if (BeatSpawner.canBePressed == false && hasBeenPressed == true)
-            {
-                hasBeenPressed = false;
+                BeatSpawner.aiCanMove = false;
             }
         }    
     }

@@ -26,9 +26,11 @@ public class BeatSpawner : MonoBehaviour
     public static bool canBePressed = false;
     //Will be watched by PlayerController and immediately set to false after turning true (so that PlayerController can send that notification to other scripts)
     public static bool beatEntered = false;
+    public static bool aiCanMove = false;
 
     private float lastTime, deltaTime, timer, delay, beatTime;
     private bool hitInRange;
+    private bool aiMoved=false;
 
     private GameObject beat;
     private Vector2 lerpStartPosition;
@@ -95,17 +97,23 @@ public class BeatSpawner : MonoBehaviour
 
             if (timer>=beatTime-hitTolerance&&canBePressed==false)
             {
-                float quick = beatTime + hitTolerance;
                 canBePressed = true;
             }
             else if(timer>=beatTime+hitTolerance)
             {
                 timer -= beatTime+hitTolerance;
+                aiMoved = false;
                 canBePressed = false;
             }
             else if(timer<beatTime-hitTolerance)
             {
                 canBePressed = false;
+            }
+
+            if(timer>=beatTime/2&&aiMoved==false)
+            {
+                aiCanMove = true;
+                aiMoved = true;
             }
             /*if (timer >= (60f / bpm))
             {
