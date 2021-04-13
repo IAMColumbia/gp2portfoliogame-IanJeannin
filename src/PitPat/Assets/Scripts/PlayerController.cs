@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private UnitProfile unitProfile;
     private Movement movement;
 
+    private Vector3 startingPosition = new Vector3();
     private bool beatHit = false;
 
     private void Start()
@@ -34,6 +35,8 @@ public class PlayerController : MonoBehaviour
         unitProfile.Initialize(maxHealth);
         movement = this.gameObject.AddComponent<Movement>();
         movement.Initialize(groundTilemap, collisionTilemap);
+
+        startingPosition = gameObject.transform.position;
     }
     
     private void Update()
@@ -98,5 +101,11 @@ public class PlayerController : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void Reset()
+    {
+        transform.position = startingPosition;
+        bool successfulRotate=movement.Rotate(new Vector3(0,-1,0));
     }
 }

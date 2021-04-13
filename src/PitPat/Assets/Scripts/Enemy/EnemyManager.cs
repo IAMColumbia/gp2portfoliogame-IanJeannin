@@ -10,7 +10,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private int beatsBeforeSpawn = 10;
 
-    private List<GameObject> enemies=new List<GameObject>();
+    private static List<GameObject> enemies=new List<GameObject>();
     private float beatCounter = 0;
     private bool hasBeenPressed;
 
@@ -31,19 +31,30 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
-        if(BeatSpawner.canBePressed==true&&hasBeenPressed==false)
+        if (GameState.stateOfGame == GameState.StateOfGame.Play)
         {
-            beatCounter++;
-            if(beatCounter>=beatsBeforeSpawn)
+            if (BeatSpawner.canBePressed == true && hasBeenPressed == false)
             {
-                beatCounter = 0;
-                SpawnEnemy();
+                beatCounter++;
+                if (beatCounter >= beatsBeforeSpawn)
+                {
+                    beatCounter = 0;
+                    SpawnEnemy();
+                }
+                hasBeenPressed = true;
             }
-            hasBeenPressed = true;
-        }
-        else if(BeatSpawner.canBePressed==false&&hasBeenPressed==true)
+            else if (BeatSpawner.canBePressed == false && hasBeenPressed == true)
+            {
+                hasBeenPressed = false;
+            }
+        }    
+    }
+
+    public static void ClearEnemies()
+    {
+        foreach(GameObject enemy in enemies)
         {
-            hasBeenPressed = false;
+            Destroy(enemy);
         }
     }
 }

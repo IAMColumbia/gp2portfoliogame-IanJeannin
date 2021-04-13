@@ -22,7 +22,17 @@ public class UnitProfile : MonoBehaviour
         }
         else if(currentHealth<=0)
         {
-            Destroy(this.gameObject);
+            if(this.gameObject.GetComponent<PlayerController>())
+            {
+                GameState.stateOfGame = GameState.StateOfGame.Menu;
+                this.currentHealth = maxHealth;
+                EnemyManager.ClearEnemies();
+                this.gameObject.GetComponent<PlayerController>().Reset();
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 
