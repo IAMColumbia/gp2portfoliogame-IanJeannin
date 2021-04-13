@@ -5520,6 +5520,9 @@ MonoBehaviour:
   note: {fileID: 2781945111282521427, guid: 91c418143eab53c46a61e5fb490a4cb2, type: 3}
   bpm: 120
   soundManager: {fileID: 55378783}
+  hitTolerance: 0.05
+  beatLane: {fileID: 0}
+  beatMarker: {fileID: 0}
 --- !u!212 &1610643057
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="attackGrid"></param>
     public void Attack(bool[,] attackGrid,int damage)
     {
-        if(BeatTrigger.canBePressed==true && beatHit == false)
+        if(BeatSpawner.canBePressed==true && beatHit == false)
         {
             beatHit = true;
             BeatTrigger.beatsHit++;
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
     }
     public bool Move(Vector2 direction)
     {
-        if(BeatTrigger.canBePressed && beatHit == false)
+        if(BeatSpawner.canBePressed && beatHit == false)
         {
             beatHit = true;
             BeatTrigger.beatsHit++;
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
 
     public bool Rotate(Vector2 direction)
     {
-        if (BeatTrigger.canBePressed&&beatHit==false)
+        if (BeatSpawner.canBePressed&&beatHit==false)
         {
             beatHit = true;
             BeatTrigger.beatsHit++;
