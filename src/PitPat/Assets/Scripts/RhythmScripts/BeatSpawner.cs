@@ -41,7 +41,6 @@ public class BeatSpawner : MonoBehaviour
         deltaTime = 0f;
         timer = 0f;
 
-        soundManager.PlaySong(soundManager.GetSong(0));
         //bpm = soundManager.GetSong(0).GetBPM();
         bpm = 120;
         beatTime = 1.0f/(bpm / 60.0f);
@@ -52,6 +51,7 @@ public class BeatSpawner : MonoBehaviour
         lerpStartPosition.x=lerpStartPosition.x+beatLane.GetComponent<Renderer>().bounds.size.x / 2;
         lerpEndPosition.x = lerpEndPosition.x - beatLane.GetComponent<Renderer>().bounds.size.x / 2;
         beat=Instantiate(beatMarker, lerpStartPosition, Quaternion.identity);
+        ((GameObject)Instantiate(beatMarker, lerpStartPosition, Quaternion.identity)).GetComponent<Transform>().parent = GetComponent<Transform>();
         ((GameObject)Instantiate(beatMarker, lerpEndPosition, Quaternion.identity)).GetComponent<Transform>().parent = GetComponent<Transform>();
     }
 

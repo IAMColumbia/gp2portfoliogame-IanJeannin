@@ -12,7 +12,7 @@ public class Songs : MonoBehaviour
     [SerializeField]
     private List<float> beatDelay;
     [SerializeField]
-    private AudioSource bgmSource;
+    private static AudioSource bgmSource;
 
     public static List<Song> songsList=new List<Song>();
 
@@ -44,11 +44,9 @@ public class Songs : MonoBehaviour
             bgmSource=this.gameObject.AddComponent<AudioSource>();
         }
         bgmSource.loop = true;
-
-        PlaySong(songsList[0]);
     }
 
-    public Song GetSong(int index)
+    public static Song GetSong(int index)
     {
         if(index>=songsList.Count)
         {
@@ -61,13 +59,13 @@ public class Songs : MonoBehaviour
         }
     }
 
-    public Song GetRandomSong(int index)
+    public static Song GetRandomSong()
     {
         int randomIndex = Random.Range(0, songsList.Count);
         return songsList[randomIndex];
     }
 
-    public void PlaySong(Song song)
+    public static void PlaySong(Song song)
     {
         bgmSource.clip = song.GetSong();
         bgmSource.Play();
