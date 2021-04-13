@@ -15,7 +15,7 @@ public class UnitAttack: MonoBehaviour
         markerHolder = attackMarkerHolder;
     }
 
-    public void Attack(bool[,] attackGrid,Vector3 lastDirection, GameObject attackMarker,int damage)
+    public void Attack(float[,] attackGrid,Vector3 lastDirection, GameObject attackMarker,int damage)
     {
         //The space that the first index of the attackGrid aligns to. 
         Vector3 targetedSpace = attackingObject.transform.position;
@@ -68,7 +68,7 @@ public class UnitAttack: MonoBehaviour
         {
             for (int col = 0; col < 7; col++)
             {
-                if (attackGrid[row, col] == true)
+                if (attackGrid[row, col] >=0)
                 {
                     Collider2D [] enemyColliders=new Collider2D[1];
                     //TODO: AttackTile
@@ -78,7 +78,7 @@ public class UnitAttack: MonoBehaviour
                     Physics2D.OverlapCircle(targetedSpace, 0.05f, filter, enemyColliders);
                     if (enemyColliders[0]==true)
                     {
-                        enemyColliders[0].gameObject.GetComponent<UnitProfile>().ChangeHealth(-damage);
+                        enemyColliders[0].gameObject.GetComponent<UnitProfile>().ChangeHealth(-damage* (int)attackGrid[row,col]);
                         Debug.Log("Health: " + enemyColliders[0].gameObject.GetComponent<UnitProfile>().GetHealth());
                     }
                     Instantiate(attackMarker, targetedSpace, Quaternion.identity, markerHolder.transform);

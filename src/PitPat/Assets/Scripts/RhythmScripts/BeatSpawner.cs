@@ -88,7 +88,6 @@ public class BeatSpawner : MonoBehaviour
 
             if (timer>=beatTime)
             {
-                Debug.Log("HI");
                 Vector2 tempPosition = lerpStartPosition;
                 lerpStartPosition = lerpEndPosition;
                 lerpEndPosition = tempPosition;
@@ -96,14 +95,11 @@ public class BeatSpawner : MonoBehaviour
 
             if (timer>=beatTime-hitTolerance&&canBePressed==false)
             {
-                Debug.Log("Beat entered");
                 float quick = beatTime + hitTolerance;
-                Debug.Log("beatTime+hitTolerance: " + quick);
                 canBePressed = true;
             }
             else if(timer>=beatTime+hitTolerance)
             {
-                Debug.Log("Beat Missed");
                 timer -= beatTime+hitTolerance;
                 canBePressed = false;
             }

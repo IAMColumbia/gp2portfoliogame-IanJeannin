@@ -50,7 +50,7 @@ public class EnemyController : MonoBehaviour
         unitAttack = this.gameObject.AddComponent<UnitAttack>();
         unitAttack.Initialize(this.gameObject, markerHolder);
         unitProfile = this.gameObject.AddComponent<UnitProfile>();
-        unitProfile.Initialize(3);
+        unitProfile.Initialize(1);
         movement = this.gameObject.AddComponent<Movement>(); //Enemy doesn't need to initialize
     }
 
@@ -59,7 +59,6 @@ public class EnemyController : MonoBehaviour
         Vector2 nextMove = pathfinding.FindPath(this.transform.position,player.transform.position);
         Rotate(nextMove);
         this.transform.position += (Vector3)nextMove;
-        Debug.Log("Enemy moves: " + nextMove);
     }
 
     bool hasMovedThisBeat = false;
@@ -72,7 +71,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            if (BeatTrigger.canBePressed == true && hasMovedThisBeat == false)
+            if (BeatSpawner.canBePressed == true && hasMovedThisBeat == false)
             {
                 hasMovedThisBeat = true;
                 float successChance = Random.Range(0, 100);
@@ -101,7 +100,7 @@ public class EnemyController : MonoBehaviour
                     //failureChance = maxSuccessChance - ((BeatTrigger.beatsCounter - BeatTrigger.beatsHit) * missedBeatWeight);
                 }
             }
-            else if (BeatTrigger.canBePressed == false && hasMovedThisBeat == true)
+            else if (BeatSpawner.canBePressed == false && hasMovedThisBeat == true)
             {
                 hasMovedThisBeat = false;
             }
@@ -124,7 +123,7 @@ public class EnemyController : MonoBehaviour
             return false;
         }
     }
-    public void Attack(bool[,] attackGrid, int damage)
+    public void Attack(float[,] attackGrid, int damage)
     {
             unitAttack.Attack(attackGrid, lastDirection, attackMarker, damage);
     }

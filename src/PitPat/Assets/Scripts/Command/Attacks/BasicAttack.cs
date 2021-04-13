@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class BasicAttack : Attack
 {
-    private bool[,] attackedSpaces;
+    private float[,] attackedSpaces;
     private int damage;
     public BasicAttack() : base()
     {
         this.commandName = "Basic Attack";
-        attackedSpaces = new bool[7, 7];
+        attackedSpaces = new float[7, 7];
         attackedSpaces = SetUpAttackGrid();
         damage = 1;
     }
@@ -34,17 +34,17 @@ public class BasicAttack : Attack
     /// "True" spaces are ones that will be attacked
     /// </summary>
     /// <returns></returns>
-    public override bool[,] SetUpAttackGrid()
+    public override float[,] SetUpAttackGrid()
     {
-        bool[,] attackedSpacesX = new bool[7, 7]
+        float[,] attackedSpacesX = new float[7, 7]
         {
-            {false,false,false,false,false,false,false},
-            {false,false,false,false,false,false,false},
-            {false,false,false,true,false,false,false},
-            {false,false,false,false,false,false,false},
-            {false,false,false,false,false,false,false},
-            {false,false,false,false,false,false,false},
-            {false,false,false,false,false,false,false},
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0},
+            {0,0,0,100,0,0,0},
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0},
         };
         return attackedSpacesX;
     }

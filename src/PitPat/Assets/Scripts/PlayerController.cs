@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
     /// NOTE: AttackGrid must be [7,7]
     /// </summary>
     /// <param name="attackGrid"></param>
-    public void Attack(bool[,] attackGrid,int damage)
+    public void Attack(float[,] attackGrid,int damage)
     {
         if(BeatSpawner.canBePressed==true && beatHit == false)
         {

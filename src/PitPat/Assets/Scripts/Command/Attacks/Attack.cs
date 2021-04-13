@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Attack : Command
 {
-    private bool[,] attackedSpaces;
+    private float[,] attackedSpaces;
     private int damage;
     public Attack() : base()
     {
         this.commandName = "Attack";
-        attackedSpaces = new bool[7, 7];
+        attackedSpaces = new float[7, 7];
         attackedSpaces = SetUpAttackGrid();
         damage = 0;
     }
@@ -27,20 +27,20 @@ public class Attack : Command
 
     /// <summary>
     /// Use to initialize the values of the attack grid. The targeted space is [4,4] (Most attacks will have the player as the targeted space)
-    /// "True" spaces are ones that will be attacked
+    /// The number is the percent of damage
     /// </summary>
     /// <returns></returns>
-    public virtual bool[,] SetUpAttackGrid()
+    public virtual float[,] SetUpAttackGrid()
     {
-        bool[,] attackedSpacesX = new bool[7, 7]
+        float[,] attackedSpacesX = new float[7, 7]
         {
-            {false,false,false,false,false,false,false},
-            {false,false,false,false,false,false,false},
-            {false,false,false,false,false,false,false},
-            {false,false,false,false,false,false,false},
-            {false,false,false,false,false,false,false},
-            {false,false,false,false,false,false,false},
-            {false,false,false,false,false,false,false},
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0},
         };
         return attackedSpacesX;
     }

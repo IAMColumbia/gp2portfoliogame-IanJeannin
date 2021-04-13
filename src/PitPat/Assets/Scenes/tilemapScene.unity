@@ -156,7 +156,6 @@ MonoBehaviour:
   songBPM: 7b000000
   beatDelay:
   - 0.244
-  bgmSource: {fileID: 55378784}
 --- !u!82 &55378784
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5937,6 +5936,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720649850}
   m_CullTransparentMesh: 0
+--- !u!1 &774812426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 774812428}
+  - component: {fileID: 774812427}
+  m_Layer: 0
+  m_Name: BeatLane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &774812427
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774812426}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 2084870679
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: b093eea40e899c44a9f053f365c55aed, type: 3}
+  m_Color: {r: 0.50507927, g: 1, b: 0, a: 0.6117647}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &774812428
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774812426}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.21, y: -5.54, z: 0}
+  m_LocalScale: {x: 14.195625, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &780047675
 GameObject:
   m_ObjectHideFlags: 0
@@ -6732,7 +6812,7 @@ MonoBehaviour:
   bpm: 120
   soundManager: {fileID: 55378783}
   hitTolerance: 0.05
-  beatLane: {fileID: 0}
+  beatLane: {fileID: 774812426}
   beatMarker: {fileID: 633600024394828760, guid: 98e98e5e6612dca49a811806016679d9,
     type: 3}
 --- !u!212 &1610643057
@@ -7195,38 +7275,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1827481794}
   m_CullTransparentMesh: 0
---- !u!1 &1952293310 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9101231249518810888, guid: e7c27cafb7c0ff74ebcc6ced58f2e388,
-    type: 3}
-  m_PrefabInstance: {fileID: 9101231248644077238}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1952293315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1952293310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6ca3468d2e62344683cd88c40fd41be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1952293316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1952293310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3786eaad3e15334468dcdb1f692a03be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitType: 0
-  attackTypes: 00000000
 --- !u!1 &2043763429
 GameObject:
   m_ObjectHideFlags: 0
@@ -7550,24 +7598,8 @@ PrefabInstance:
       objectReference: {fileID: 2043763429}
     - target: {fileID: 9101231249518810999, guid: e7c27cafb7c0ff74ebcc6ced58f2e388,
         type: 3}
-      propertyPath: pathfinding
-      value: 
-      objectReference: {fileID: 1952293315}
-    - target: {fileID: 9101231249518810999, guid: e7c27cafb7c0ff74ebcc6ced58f2e388,
-        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1555760140}
-    - target: {fileID: 9101231249518810999, guid: e7c27cafb7c0ff74ebcc6ced58f2e388,
-        type: 3}
-      propertyPath: attackMarker
-      value: 
-      objectReference: {fileID: 5010222623209261962, guid: 18cb7835b3e4ce14b8fbc32b0add2339,
-        type: 3}
-    - target: {fileID: 9101231249518810999, guid: e7c27cafb7c0ff74ebcc6ced58f2e388,
-        type: 3}
-      propertyPath: missedBeatWeight
-      value: 7.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7c27cafb7c0ff74ebcc6ced58f2e388, type: 3}
