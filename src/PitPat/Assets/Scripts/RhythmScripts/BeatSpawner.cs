@@ -64,7 +64,6 @@ public class BeatSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
             if (delay > 0)
             {
                 delay -= Time.deltaTime;
@@ -74,6 +73,9 @@ public class BeatSpawner : MonoBehaviour
             timer += Time.deltaTime;
 
             //beat.transform.position = Vector3.Lerp(lerpStartPosition, lerpEndPosition, timer*(1/beatTime));
+
+
+            //Instantiate variables outside of function
 
             // The center of the arc
             Vector3 center = beatLane.transform.position;
@@ -102,6 +104,7 @@ public class BeatSpawner : MonoBehaviour
             if (timer>=beatTime-hitTolerance&&canBePressed==false)
             {
                 canBePressed = true;
+                aiCanMove = false;
             }
             else if(timer>=beatTime+hitTolerance)
             {

@@ -107,5 +107,6 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = startingPosition;
         bool successfulRotate=movement.Rotate(new Vector3(0,-1,0));
+        GameState.stateOfGame = GameState.StateOfGame.Pause;
     }
 }

@@ -42,7 +42,7 @@ public class Songs : MonoBehaviour
         if(bgmSource==null)
         {
             bgmSource=this.gameObject.AddComponent<AudioSource>();
-            bgmSource.volume = 0.6f;
+            bgmSource.volume = 0.4f;
         }
         bgmSource.loop = true;
     }
