@@ -13,10 +13,12 @@ public class AttackManager : MonoBehaviour
     private List<AttackType> attackTypes;
 
     private enum UnitType { player, enemy };
-    private enum AttackType { basic };
+    private enum AttackType { basic, spear, bow, hatchets };
 
     //private AttackType attackType = new AttackType();
     private List<Attack> attackList=new List<Attack>();
+
+    private int currentAttackIndex=0;
 
     private void Start()
     {
@@ -24,7 +26,7 @@ public class AttackManager : MonoBehaviour
         {
             case UnitType.player:
                 {
-                    attackList.Add(new BasicAttack());
+                    SetAttackList();
                     return;
                 }
             case UnitType.enemy:
@@ -38,7 +40,7 @@ public class AttackManager : MonoBehaviour
 
     public Attack GetAttack()
     {
-        return attackList[0];
+        return attackList[currentAttackIndex];
     }
 
     public void SetAttackList()
@@ -53,11 +55,51 @@ public class AttackManager : MonoBehaviour
                     case AttackType.basic:
                         {
                             newAttack = new BasicAttack();
+                            attackList.Add(newAttack);
+                            break;
+                        }
+                    case AttackType.bow:
+                        {
+                            newAttack = new RangedAttack();
+                            attackList.Add(newAttack);
+                            break;
+                        }
+                    case AttackType.spear:
+                        {
+                            newAttack = new SpearAttack();
+                            attackList.Add(newAttack);
+                            break;
+                        }
+                    case AttackType.hatchets:
+                        {
+                            newAttack = new HatchetsAttack();
+                            attackList.Add(newAttack);
                             break;
                         }
                 }
             }
         }
         
+    }
+
+    public void SwitchAttack(int newAttack)
+    {
+        if(newAttack>=0&&newAttack<attackList.Count)
+        {
+            currentAttackIndex = newAttack;
+        }
+        else if(newAttack<0)
+        {
+            currentAttackIndex = attackList.Count-1;
+        }
+        else if(newAttack>attackList.Count)
+        {
+            currentAttackIndex = 0;
+        }
+    }
+
+    public int GetAttackIndex()
+    {
+        return currentAttackIndex;
     }
 }

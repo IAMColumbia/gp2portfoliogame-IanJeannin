@@ -41,7 +41,9 @@ public class Input : MonoBehaviour
         controls.Main.Rotate.performed += ctx => RotateCommand(ctx.ReadValue<Vector2>());
         controls.Main.Attack.performed += ctx => AttackCommand();
         controls.Main.Mute.performed += ctx => MuteCommand();
-        controls.Main.Mute.performed += ctx => Quit();
+        controls.Main.Quit.performed += ctx => Quit();
+        controls.Main.SwitchAttackLeft.performed += ctx => SwitchAttackLeft();
+        controls.Main.SwitchAttackRight.performed += ctx => SwitchAttackRight();
     }
 
     private void MoveCommand(Vector2 direction)
@@ -86,6 +88,18 @@ public class Input : MonoBehaviour
         //attack.Execute(CommandTarget);
         //Command newCommand = new Attack();
         //newCommand.Execute(CommandTarget);
+    }
+
+    private void SwitchAttackLeft()
+    {
+        //AttackManager atkManager = CommandTarget.GetComponent<AttackManager>();
+        CommandTarget.GetComponent<AttackManager>().SwitchAttack(CommandTarget.GetComponent<AttackManager>().GetAttackIndex()-1);
+    }
+
+    private void SwitchAttackRight()
+    {
+        //AttackManager atkManager = CommandTarget.GetComponent<AttackManager>();
+        CommandTarget.GetComponent<AttackManager>().SwitchAttack(CommandTarget.GetComponent<AttackManager>().GetAttackIndex() + 1);
     }
 
     private void MuteCommand()

@@ -57,6 +57,22 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""SwitchAttackLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""c41fe254-ee4e-470c-868d-f793fe55ec33"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""SwitchAttackRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""a8a690d8-95c7-4466-b4ff-c84868d34307"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -202,6 +218,28 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
                     ""action"": ""Quit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c556e658-d280-4632-8227-3a81dd7606bc"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchAttackLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""71650ea8-5778-4cb8-8bc5-8c44fb030891"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchAttackRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -215,6 +253,8 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
         m_Main_Rotate = m_Main.FindAction("Rotate", throwIfNotFound: true);
         m_Main_Mute = m_Main.FindAction("Mute", throwIfNotFound: true);
         m_Main_Quit = m_Main.FindAction("Quit", throwIfNotFound: true);
+        m_Main_SwitchAttackLeft = m_Main.FindAction("SwitchAttackLeft", throwIfNotFound: true);
+        m_Main_SwitchAttackRight = m_Main.FindAction("SwitchAttackRight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -269,6 +309,8 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
     private readonly InputAction m_Main_Rotate;
     private readonly InputAction m_Main_Mute;
     private readonly InputAction m_Main_Quit;
+    private readonly InputAction m_Main_SwitchAttackLeft;
+    private readonly InputAction m_Main_SwitchAttackRight;
     public struct MainActions
     {
         private @PlayerMovement m_Wrapper;
@@ -278,6 +320,8 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
         public InputAction @Rotate => m_Wrapper.m_Main_Rotate;
         public InputAction @Mute => m_Wrapper.m_Main_Mute;
         public InputAction @Quit => m_Wrapper.m_Main_Quit;
+        public InputAction @SwitchAttackLeft => m_Wrapper.m_Main_SwitchAttackLeft;
+        public InputAction @SwitchAttackRight => m_Wrapper.m_Main_SwitchAttackRight;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -302,6 +346,12 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
                 @Quit.started -= m_Wrapper.m_MainActionsCallbackInterface.OnQuit;
                 @Quit.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnQuit;
                 @Quit.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnQuit;
+                @SwitchAttackLeft.started -= m_Wrapper.m_MainActionsCallbackInterface.OnSwitchAttackLeft;
+                @SwitchAttackLeft.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnSwitchAttackLeft;
+                @SwitchAttackLeft.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnSwitchAttackLeft;
+                @SwitchAttackRight.started -= m_Wrapper.m_MainActionsCallbackInterface.OnSwitchAttackRight;
+                @SwitchAttackRight.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnSwitchAttackRight;
+                @SwitchAttackRight.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnSwitchAttackRight;
             }
             m_Wrapper.m_MainActionsCallbackInterface = instance;
             if (instance != null)
@@ -321,6 +371,12 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
                 @Quit.started += instance.OnQuit;
                 @Quit.performed += instance.OnQuit;
                 @Quit.canceled += instance.OnQuit;
+                @SwitchAttackLeft.started += instance.OnSwitchAttackLeft;
+                @SwitchAttackLeft.performed += instance.OnSwitchAttackLeft;
+                @SwitchAttackLeft.canceled += instance.OnSwitchAttackLeft;
+                @SwitchAttackRight.started += instance.OnSwitchAttackRight;
+                @SwitchAttackRight.performed += instance.OnSwitchAttackRight;
+                @SwitchAttackRight.canceled += instance.OnSwitchAttackRight;
             }
         }
     }
@@ -332,5 +388,7 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
         void OnRotate(InputAction.CallbackContext context);
         void OnMute(InputAction.CallbackContext context);
         void OnQuit(InputAction.CallbackContext context);
+        void OnSwitchAttackLeft(InputAction.CallbackContext context);
+        void OnSwitchAttackRight(InputAction.CallbackContext context);
     }
 }
