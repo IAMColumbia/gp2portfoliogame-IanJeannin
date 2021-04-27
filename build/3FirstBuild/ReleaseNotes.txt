@@ -1,1 +1,10 @@
 Release Notes version 3 Final
+
+Add Health bars
+Add switching weapons using Q/E
+Change skeleton movement from a random failure chance to guaranteed one move every three beats (Skeletons move on half-beats)
+
+TODO:
+Refactor BeatSpawner script
+Fix swap weapons not resetting back to 0 after hitting end of list
+Improve visual feedback
