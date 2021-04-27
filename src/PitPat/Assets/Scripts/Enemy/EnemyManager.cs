@@ -14,6 +14,7 @@ public class EnemyManager : MonoBehaviour
     private float beatCounter = 0;
     private bool hasBeenPressed;
     public static int enemiesKilled = 0;
+    public static int highScore = 0;
 
     private static int beatsBeforeSpawn;
     private static int defaultBeatsBeforeSpawn; //Convert the serialized into a static
@@ -70,6 +71,10 @@ public class EnemyManager : MonoBehaviour
     {
         enemies.Remove(enemy);
         enemiesKilled++;
+        if(enemiesKilled>=highScore)
+        {
+            highScore = enemiesKilled;
+        }
         Destroy(enemy);
         if(enemiesKilled/4==1&&beatsBeforeSpawn>4)
         {

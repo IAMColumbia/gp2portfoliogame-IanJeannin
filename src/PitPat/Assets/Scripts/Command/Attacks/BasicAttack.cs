@@ -5,7 +5,7 @@ using UnityEngine;
 public class BasicAttack : Attack
 {
     private float[,] attackedSpaces;
-    private int damage;
+    private float damage;
     public BasicAttack() : base()
     {
         this.commandName = "Basic Attack";

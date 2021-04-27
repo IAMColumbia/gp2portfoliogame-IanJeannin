@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class UnitProfile : MonoBehaviour
 {
-    private int maxHealth;
-    private int currentHealth;
+    private float maxHealth;
+    private float currentHealth;
 
     public void Initialize(int startingHealth)
     {
@@ -13,7 +13,7 @@ public class UnitProfile : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void ChangeHealth(int adjustment)
+    public void ChangeHealth(float adjustment)
     {
         currentHealth += adjustment;
         if(this.gameObject.GetComponent<UnitUI>()!=null)
@@ -40,12 +40,12 @@ public class UnitProfile : MonoBehaviour
         }
     }
 
-    public int GetHealth()
+    public float GetHealth()
     {
         return currentHealth;
     }
 
-    public int GetMaxHealth()
+    public float GetMaxHealth()
     {
         return maxHealth;
     }

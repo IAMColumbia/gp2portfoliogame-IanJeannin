@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpearAttack : Attack
 {
     private float[,] attackedSpaces;
-    private int damage;
+    private float damage;
     public SpearAttack() : base()
     {
         this.commandName = "Spear Attack";

@@ -5,7 +5,7 @@ using UnityEngine;
 public class HatchetsAttack : Attack
 {
     private float[,] attackedSpaces;
-    private int damage;
+    private float damage;
     public HatchetsAttack() : base()
     {
         this.commandName = "Hatchets Attack";

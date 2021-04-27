@@ -10,7 +10,7 @@ public class UnitUI : MonoBehaviour
     private GameObject redHealth;
 
 
-    public void ChangeHealthBar(int maxHealth,int currentHealth)
+    public void ChangeHealthBar(float maxHealth,float currentHealth)
     {
         Vector3 greenHealthScale = greenHealth.transform.localScale;
         greenHealthScale.x = (float)currentHealth / maxHealth;

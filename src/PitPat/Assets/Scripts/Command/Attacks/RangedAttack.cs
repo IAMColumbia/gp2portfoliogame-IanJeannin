@@ -5,7 +5,7 @@ using UnityEngine;
 public class RangedAttack : Attack
 {
     private float[,] attackedSpaces;
-    private int damage;
+    private float damage;
     public RangedAttack() : base()
     {
         this.commandName = "Ranged Attack";

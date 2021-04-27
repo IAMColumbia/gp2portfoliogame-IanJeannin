@@ -26,6 +26,10 @@ public class EnemyController : MonoBehaviour
     private float maxSuccessChance = 100;
     private float failureChance=30;
 
+    //Variables used to prevent skeletons moving every single beat.
+    private float beatsToMove = 3;
+    private float beatCounter = 0;
+
     private UnitAttack unitAttack;
     private UnitProfile unitProfile;
     private AttackManager attackManager;
@@ -71,33 +75,43 @@ public class EnemyController : MonoBehaviour
         {
             if (BeatSpawner.aiCanMove == true && hasMovedThisBeat == false)
             {
-                hasMovedThisBeat = true;
-                float successChance = Random.Range(0, 100);
-                float successMarker = maxSuccessChance - failureChance;
-                // If the random is within the success range
-                if (successChance <= successMarker)
+                if (beatCounter < beatsToMove)
                 {
-                    if (IsAdjacentToPlayer() == false)
-                    {
-                        SetMovementVector();
-                    }
-                    else if (this.transform.position + lastDirection != player.transform.position)
-                    {
-                        Vector2 lookDirection = player.transform.position - this.transform.position;
-                        Rotate(lookDirection);
-                    }
-                    else
-                    {
-                        attackManager.GetAttack().Execute(this.gameObject);
-                    }
+                    hasMovedThisBeat = true;
+                    beatCounter++;
                 }
-                if (BeatTrigger.beatsCounter == 10)
+                else
                 {
-                    //Every missed beat gives the AI a 7.5% greater chance of failure.
-                    //Because this is checked every 10 beats, there is a min
-                    //failureChance = maxSuccessChance - ((BeatTrigger.beatsCounter - BeatTrigger.beatsHit) * missedBeatWeight);
+                    beatCounter = 0;
+                    hasMovedThisBeat = true;
+                    float successChance = Random.Range(0, 100);
+                    float successMarker = maxSuccessChance - failureChance;
+                    // If the random is within the success range
+                    //if (successChance <= successMarker)
+                    if (successChance <= 100) //Due to having enemies move once every 3 beats instead, no need for random chance
+                    {
+                        if (IsAdjacentToPlayer() == false)
+                        {
+                            SetMovementVector();
+                        }
+                        else if (this.transform.position + lastDirection != player.transform.position)
+                        {
+                            Vector2 lookDirection = player.transform.position - this.transform.position;
+                            Rotate(lookDirection);
+                        }
+                        else
+                        {
+                            attackManager.GetAttack().Execute(this.gameObject);
+                        }
+                    }
+                    if (BeatTrigger.beatsCounter == 10)
+                    {
+                        //Every missed beat gives the AI a 7.5% greater chance of failure.
+                        //Because this is checked every 10 beats, there is a min
+                        //failureChance = maxSuccessChance - ((BeatTrigger.beatsCounter - BeatTrigger.beatsHit) * missedBeatWeight);
+                    }
+                    //BeatSpawner.aiCanMove = false;
                 }
-                //BeatSpawner.aiCanMove = false;
             }
             else if(BeatSpawner.aiCanMove==false)
             {
@@ -122,7 +136,7 @@ public class EnemyController : MonoBehaviour
             return false;
         }
     }
-    public void Attack(float[,] attackGrid, int damage)
+    public void Attack(float[,] attackGrid, float damage)
     {
             unitAttack.Attack(attackGrid, lastDirection, attackMarker, damage);
     }
