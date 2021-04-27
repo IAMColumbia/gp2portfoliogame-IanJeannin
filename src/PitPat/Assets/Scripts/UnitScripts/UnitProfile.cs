@@ -16,6 +16,10 @@ public class UnitProfile : MonoBehaviour
     public void ChangeHealth(int adjustment)
     {
         currentHealth += adjustment;
+        if(this.gameObject.GetComponent<UnitUI>()!=null)
+        {
+            this.gameObject.GetComponent<UnitUI>().ChangeHealthBar(maxHealth, currentHealth);
+        }
         if(currentHealth>maxHealth)
         {
             currentHealth = maxHealth;
@@ -39,6 +43,11 @@ public class UnitProfile : MonoBehaviour
     public int GetHealth()
     {
         return currentHealth;
+    }
+
+    public int GetMaxHealth()
+    {
+        return maxHealth;
     }
 
 }

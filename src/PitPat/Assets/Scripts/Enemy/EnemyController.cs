@@ -12,6 +12,8 @@ public class EnemyController : MonoBehaviour
     private GameObject player;
     [SerializeField]
     private GameObject attackMarker;
+    [SerializeField]
+    private int maxHealth;
 
     //Player starts the game looking down
     private Vector3 lastDirection = new Vector3(0, -1, 0);
@@ -50,7 +52,7 @@ public class EnemyController : MonoBehaviour
         unitAttack = this.gameObject.AddComponent<UnitAttack>();
         unitAttack.Initialize(this.gameObject, markerHolder);
         unitProfile = this.gameObject.AddComponent<UnitProfile>();
-        unitProfile.Initialize(1);
+        unitProfile.Initialize(maxHealth);
         movement = this.gameObject.AddComponent<Movement>(); //Enemy doesn't need to initialize
     }
 
