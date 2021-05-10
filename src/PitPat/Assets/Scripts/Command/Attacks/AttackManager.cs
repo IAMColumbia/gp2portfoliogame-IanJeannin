@@ -92,10 +92,26 @@ public class AttackManager : MonoBehaviour
         {
             currentAttackIndex = attackList.Count-1;
         }
-        else if(newAttack>attackList.Count)
+        else if(newAttack>attackList.Count-1)
         {
             currentAttackIndex = 0;
         }
+        switch (currentAttackIndex)
+        {
+            case 0:
+                UI.currentWeapon = UI.Weapons.Sword;
+                break;
+            case 1:
+                UI.currentWeapon = UI.Weapons.Spear;
+                break;
+            case 2:
+                UI.currentWeapon = UI.Weapons.Axe;
+                break;
+            case 3:
+                UI.currentWeapon = UI.Weapons.Bow;
+                break;
+        }
+        UI.SwitchWeapon();
     }
 
     public int GetAttackIndex()

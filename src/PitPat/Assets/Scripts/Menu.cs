@@ -7,6 +7,8 @@ public class Menu : MonoBehaviour
     [SerializeField]
     private GameObject menuPanel;
     [SerializeField]
+    private GameObject instructionsPanel;
+    [SerializeField]
     private GameObject creditsPanel;
 
     private void Start()
@@ -46,9 +48,17 @@ public class Menu : MonoBehaviour
         creditsPanel.SetActive(true);
     }
 
+    public void ShowInstructions()
+    {
+        menuPanel.SetActive(false);
+        creditsPanel.SetActive(false);
+        instructionsPanel.SetActive(true);
+    }
+
     public void ShowMenu()
     {
         menuPanel.SetActive(true);
         creditsPanel.SetActive(false);
+        instructionsPanel.SetActive(false);
     }
 }
