@@ -50,7 +50,7 @@ public class UIMetronome : MonoBehaviour
             // The fraction of the animation that has happened so far is
             // equal to the elapsed time divided by the desired time for
             // the total journey.
-            float fracComplete = BeatSpawner.timer / beatTime+0.085f;
+            float fracComplete = BeatSpawner.timer / beatTime+0.085f; //Hard-coded Hit-Tolerance (For more accurate visuals timing)
 
             beat.transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
             beat.transform.position += center;

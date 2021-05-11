@@ -30,6 +30,7 @@ public class UnitProfile : MonoBehaviour
             {
                 GameState.stateOfGame = GameState.StateOfGame.Menu;
                 this.currentHealth = maxHealth;
+                this.gameObject.GetComponent<UnitUI>().ChangeHealthBar(maxHealth, currentHealth);
                 EnemyManager.ClearEnemies();
                 this.gameObject.GetComponent<PlayerController>().Reset();
             }

@@ -56,7 +56,15 @@ public class EnemyController : MonoBehaviour
     {
         Vector2 nextMove = pathfinding.FindPath(this.transform.position,player.transform.position);
         Rotate(nextMove);
-        this.transform.position += (Vector3)nextMove;
+        Collider2D[] enemyColliders = new Collider2D[1];
+        LayerMask mask = LayerMask.GetMask("Enemies", "Player");
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.layerMask = mask;
+        Physics2D.OverlapCircle(this.transform.position+(Vector3)nextMove, 0.05f, filter, enemyColliders);
+        if (enemyColliders[0] == false)
+        {
+            this.transform.position += (Vector3)nextMove;
+        }
     }
 
     bool hasMovedThisBeat = false;
@@ -78,23 +86,18 @@ public class EnemyController : MonoBehaviour
                     hasMovedThisBeat = true;
                     float successChance = Random.Range(0, 100);
                     float successMarker = maxSuccessChance - failureChance;
-                    // If the random is within the success range
-                    //if (successChance <= successMarker)
-                    if (successChance <= 100) //Due to having enemies move once every 3 beats instead, no need for random chance
+                    if (IsAdjacentToPlayer() == false)
                     {
-                        if (IsAdjacentToPlayer() == false)
-                        {
-                            SetMovementVector();
-                        }
-                        else if (this.transform.position + lastDirection != player.transform.position)
-                        {
-                            Vector2 lookDirection = player.transform.position - this.transform.position;
-                            Rotate(lookDirection);
-                        }
-                        else
-                        {
-                            attackManager.GetAttack().Execute(this.gameObject);
-                        }
+                        SetMovementVector();
+                    }
+                    else if (this.transform.position + lastDirection != player.transform.position)
+                    {
+                        Vector2 lookDirection = player.transform.position - this.transform.position;
+                        Rotate(lookDirection);
+                    }
+                    else
+                    {
+                        attackManager.GetAttack().Execute(this.gameObject);
                     }
                 }
             }

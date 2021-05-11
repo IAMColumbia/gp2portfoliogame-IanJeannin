@@ -19,19 +19,16 @@ public class BeatSpawner : MonoBehaviour
     public static bool aiCanMove = false;
 
     public static float timer;
-    private float lastTime, deltaTime, delay, beatTime;
+    private float delay, beatTime;
     private bool hitInRange;
     private bool aiMoved=false;
 
     // Start is called before the first frame update
     void Start()
     {
-        lastTime = 0f;
-        deltaTime = 0f;
         timer = 0f;
 
         bpm = Songs.GetSong(0).GetBPM();
-        //bpm = 120;
         beatTime = 1.0f/(bpm / 60.0f);
         Debug.Log("Beat Time: "+ beatTime);
     }
