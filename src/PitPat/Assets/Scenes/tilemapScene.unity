@@ -1059,7 +1059,7 @@ GameObject:
   - component: {fileID: 220341616}
   - component: {fileID: 220341615}
   m_Layer: 5
-  m_Name: SpearText (2)
+  m_Name: BowText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1103,7 +1103,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Bow: Deals High damage at a distance.'
+  m_text: 'Bow: Deals Extreme damage at a distance.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4321,7 +4321,7 @@ GameObject:
   - component: {fileID: 598393752}
   - component: {fileID: 598393751}
   m_Layer: 5
-  m_Name: SpearText (1)
+  m_Name: AxeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8826,7 +8826,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Spear: Deals Moderate->Low damage based on distance'
+  m_text: 'Spear: Deals Low->Moderate damage based on distance'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

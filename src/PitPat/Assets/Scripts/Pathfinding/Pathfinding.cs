@@ -103,7 +103,8 @@ public class Pathfinding : MonoBehaviour
             {
                 List<WorldTile> path = RetracePath(startNode, targetNode);
                 Vector2 nextNode = path[0].transform.position;
-                if(nextNode.x>this.transform.position.x)
+                Vector2 newDirection = nextNode - (Vector2)this.transform.position;
+                /*if(nextNode.x>this.transform.position.x)
                 {
                     return new Vector2(1, 0);
                 }
@@ -118,7 +119,8 @@ public class Pathfinding : MonoBehaviour
                 else if (nextNode.y < this.transform.position.y)
                 {
                     return new Vector2(0, -1);
-                }
+                }*/
+                return newDirection;
             }
 
             foreach (WorldTile neighbour in currentNode.myNeighbours)

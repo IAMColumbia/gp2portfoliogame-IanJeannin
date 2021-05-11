@@ -235,6 +235,7 @@ public class CreateGrid : MonoBehaviour
                         foundTileOnLastPass = true;
                         node.name = "Walkable_" + gridX.ToString() + "_" + gridY.ToString();
                         wt.walkable = true;
+                        //node.GetComponent<SpriteRenderer>().color = Color.green;
                     }
                     else
                     {

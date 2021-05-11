@@ -24,6 +24,8 @@ public class EnemyController : MonoBehaviour
     private float beatsToMove = 2;
     private float beatCounter = 0;
 
+    private Vector2 movementDirection;
+
     private UnitAttack unitAttack;
     private UnitProfile unitProfile;
     private AttackManager attackManager;
@@ -55,16 +57,16 @@ public class EnemyController : MonoBehaviour
 
     void SetMovementVector()
     {
-        Vector2 nextMove = pathfinding.FindPath(this.transform.position,player.transform.position);
-        Rotate(nextMove);
+        movementDirection = pathfinding.FindPath(this.transform.position,player.transform.position);
+        Rotate(movementDirection);
         Collider2D[] enemyColliders = new Collider2D[1];
-        LayerMask mask = LayerMask.GetMask("Enemies", "Player");
+        LayerMask mask = LayerMask.GetMask("Enemies", "Player", "Collision");
         ContactFilter2D filter = new ContactFilter2D();
         filter.layerMask = mask;
-        Physics2D.OverlapCircle(this.transform.position+(Vector3)nextMove, 0.05f, filter, enemyColliders);
+        Physics2D.OverlapCircle(this.transform.position + (Vector3)movementDirection, 0.05f, filter, enemyColliders);
         if (enemyColliders[0] == false)
         {
-            this.transform.position += (Vector3)nextMove;
+            this.transform.position += (Vector3)movementDirection;
         }
     }
 
@@ -112,7 +114,7 @@ public class EnemyController : MonoBehaviour
         float xDistance = player.transform.position.x - this.gameObject.transform.position.x;
         float yDistance = player.transform.position.y - this.gameObject.transform.position.y;
         //Check if enemy is adjacent to player
-        if(xDistance<=1 && xDistance>=-1 && yDistance<=1 && yDistance>=-1&&(Mathf.Abs(xDistance)> Mathf.Abs(yDistance) || Mathf.Abs(yDistance) > Mathf.Abs(xDistance)))
+        if (xDistance<=1 && xDistance>=-1 && yDistance<=1 && yDistance>=-1 && (Mathf.Abs(xDistance) > Mathf.Abs(yDistance) || Mathf.Abs(yDistance) > Mathf.Abs(xDistance)))
         {
             Debug.Log("X Distance: "+xDistance);
             Debug.Log("Y Distance: " + yDistance);
