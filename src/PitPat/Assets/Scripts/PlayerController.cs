@@ -35,27 +35,15 @@ public class PlayerController : MonoBehaviour
 
         startingPosition = gameObject.transform.position;
     }
-    
+
     private void Update()
     {
-        if (GameState.stateOfGame == GameState.StateOfGame.Menu||GameState.stateOfGame==GameState.StateOfGame.Pause)
+        if(BeatSpawner.canBePressed==false)
         {
-
-        }
-        else
-        {
-            if (BeatTrigger.beatEntered)
-            {
-                BeatTrigger.beatEntered = false;
-                unitAttack.RemoveMarkers();
-            }
-            if (BeatTrigger.canBePressed == false)
-            {
-                beatHit = false;
-            }
+            beatHit = false;
         }
     }
-    
+
     /// <summary>
     /// Recieves an attack grid. 
     /// NOTE: AttackGrid must be [7,7]
@@ -66,7 +54,6 @@ public class PlayerController : MonoBehaviour
         if(BeatSpawner.canBePressed==true && beatHit == false)
         {
             beatHit = true;
-            BeatTrigger.beatsHit++;
             unitAttack.Attack(attackGrid, lastDirection,damage);
         }
     }
@@ -75,7 +62,6 @@ public class PlayerController : MonoBehaviour
         if(BeatSpawner.canBePressed && beatHit == false)
         {
             beatHit = true;
-            BeatTrigger.beatsHit++;
             lastDirection = direction;
             return movement.Move(direction);
         }
@@ -90,7 +76,6 @@ public class PlayerController : MonoBehaviour
         if (BeatSpawner.canBePressed&&beatHit==false)
         {
             beatHit = true;
-            BeatTrigger.beatsHit++;
             lastDirection = direction;
             return movement.Rotate(direction);
         }

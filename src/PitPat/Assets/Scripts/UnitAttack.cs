@@ -70,7 +70,6 @@ public class UnitAttack: MonoBehaviour
                 if (attackGrid[row, col] >0)
                 {
                     Collider2D [] enemyColliders=new Collider2D[1];
-                    //TODO: AttackTile
                     LayerMask mask = LayerMask.GetMask("Enemies","Player");
                     ContactFilter2D filter = new ContactFilter2D();
                     filter.layerMask = mask;

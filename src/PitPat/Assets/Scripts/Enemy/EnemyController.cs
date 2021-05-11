@@ -96,13 +96,6 @@ public class EnemyController : MonoBehaviour
                             attackManager.GetAttack().Execute(this.gameObject);
                         }
                     }
-                    if (BeatTrigger.beatsCounter == 10)
-                    {
-                        //Every missed beat gives the AI a 7.5% greater chance of failure.
-                        //Because this is checked every 10 beats, there is a min
-                        //failureChance = maxSuccessChance - ((BeatTrigger.beatsCounter - BeatTrigger.beatsHit) * missedBeatWeight);
-                    }
-                    //BeatSpawner.aiCanMove = false;
                 }
             }
             else if(BeatSpawner.aiCanMove==false)
