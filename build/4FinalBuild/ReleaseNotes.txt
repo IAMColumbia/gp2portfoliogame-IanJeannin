@@ -1,1 +1,20 @@
-Release Notes version 3 Final
+Release Notes version 4 Final
+
+Improvements:
+	Add weapon assets to improve clarity
+	Add game instructions page to improve clarity
+	Move rhythm metronome outside of BeatSpawner and into it's own script
+	Fix rhythm metronome so that it properly goes back and forth
+	Change attackMarkers to be based on ObjectPool to improve performance and fix them not disappearing
+	Removed obsolete scripts
+	Enemy movement changes
+	Balance changes
+	Prevent weapon switching outside of the beats. 
+	Add weapon shortcuts so player can instanty select the one they want
+
+Possible future improvements:
+	Move some functions outside of BeatSpawner
+	Fix enemy movement bugs (Walking into walls, not attacking player when adjacent)
+	More variety of enemies
+	Add levels
+	Add additional music

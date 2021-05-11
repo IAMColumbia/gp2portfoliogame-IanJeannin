@@ -6,6 +6,7 @@ public class UnitAttack: MonoBehaviour
 {
     private GameObject attackingObject;
     private AttackMarkers markerHolder;
+
     //private float secondsToClearMarkers;
 
     public void Initialize(GameObject controller)
