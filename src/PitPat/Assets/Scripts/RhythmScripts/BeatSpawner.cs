@@ -96,9 +96,7 @@ public class BeatSpawner : MonoBehaviour
 
             if (timer>=beatTime)
             {
-                Vector2 tempPosition = lerpStartPosition;
-                lerpStartPosition = lerpEndPosition;
-                lerpEndPosition = tempPosition;
+                
             }
 
             if (timer>=beatTime-hitTolerance&&canBePressed==false)
@@ -111,6 +109,10 @@ public class BeatSpawner : MonoBehaviour
                 timer -= beatTime+hitTolerance;
                 aiMoved = false;
                 canBePressed = false;
+
+                Vector2 tempPosition = lerpStartPosition;
+                lerpStartPosition = lerpEndPosition;
+                lerpEndPosition = tempPosition;
             }
             else if(timer<beatTime-hitTolerance)
             {

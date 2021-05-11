@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &15406536
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9424,7 +9424,7 @@ MonoBehaviour:
   note: {fileID: 2781945111282521427, guid: 91c418143eab53c46a61e5fb490a4cb2, type: 3}
   bpm: 120
   soundManager: {fileID: 55378783}
-  hitTolerance: 0.1
+  hitTolerance: 0.075
   beatLane: {fileID: 774812426}
   beatMarker: {fileID: 633600024394828760, guid: 98e98e5e6612dca49a811806016679d9,
     type: 3}
