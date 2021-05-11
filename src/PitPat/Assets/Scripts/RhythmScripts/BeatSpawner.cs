@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class BeatSpawner : MonoBehaviour
 {
-    //===================================
-    //For now this will simply be a hardcoding 120 beat
-    //===================================
-    [SerializeField]
-    private GameObject note;
     [SerializeField]
     private int bpm;
     [SerializeField]
@@ -17,24 +12,16 @@ public class BeatSpawner : MonoBehaviour
     [SerializeField]
     private float hitTolerance;
     //TODO: Change to percentage between beats?
-    [Tooltip("The background rectangle for the beat lane. Width/position used to determine lerp placement.")]
-    [SerializeField]
-    private GameObject beatLane;
-    [SerializeField]
-    private GameObject beatMarker;
 
     public static bool canBePressed = false;
     //Will be watched by PlayerController and immediately set to false after turning true (so that PlayerController can send that notification to other scripts)
     public static bool beatEntered = false;
     public static bool aiCanMove = false;
 
-    private float lastTime, deltaTime, timer, delay, beatTime;
+    public static float timer;
+    private float lastTime, deltaTime, delay, beatTime;
     private bool hitInRange;
     private bool aiMoved=false;
-
-    private GameObject beat;
-    private Vector2 lerpStartPosition;
-    private Vector2 lerpEndPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -43,61 +30,22 @@ public class BeatSpawner : MonoBehaviour
         deltaTime = 0f;
         timer = 0f;
 
-        //bpm = soundManager.GetSong(0).GetBPM();
-        bpm = 120;
+        bpm = Songs.GetSong(0).GetBPM();
+        //bpm = 120;
         beatTime = 1.0f/(bpm / 60.0f);
         Debug.Log("Beat Time: "+ beatTime);
-
-        lerpStartPosition = beatLane.transform.position;
-        lerpEndPosition = beatLane.transform.position;
-        lerpStartPosition.x=lerpStartPosition.x+beatLane.GetComponent<Renderer>().bounds.size.x / 2;
-        lerpEndPosition.x = lerpEndPosition.x - beatLane.GetComponent<Renderer>().bounds.size.x / 2;
-        beat=Instantiate(beatMarker, lerpStartPosition, Quaternion.identity);
-        GameObject leftMarker = Instantiate(beatMarker, lerpEndPosition, Quaternion.identity);
-        GameObject rightMarker = Instantiate(beatMarker, lerpStartPosition, Quaternion.identity);
-        beat.GetComponent<SpriteRenderer>().sortingLayerName = "Rhythm";
-        leftMarker.GetComponent<SpriteRenderer>().sortingLayerName = "Rhythm";
-        rightMarker.GetComponent<SpriteRenderer>().sortingLayerName = "Rhythm";
-        ((GameObject)Instantiate(beatMarker, lerpEndPosition, Quaternion.identity)).GetComponent<Transform>().parent = GetComponent<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-            if (delay > 0)
-            {
-                delay -= Time.deltaTime;
-            }
-            else
-            {
+         if (delay > 0)
+         {
+              delay -= Time.deltaTime;
+         }
+         else
+         {
             timer += Time.deltaTime;
-
-            //beat.transform.position = Vector3.Lerp(lerpStartPosition, lerpEndPosition, timer*(1/beatTime));
-
-
-            //Instantiate variables outside of function
-
-            // The center of the arc
-            Vector3 center = beatLane.transform.position;
-            // move the center a bit downwards to make the arc vertical
-            center -= new Vector3(0, 0.1f, 0);
-
-            // Interpolate over the arc relative to center
-            Vector3 riseRelCenter = (Vector3)lerpStartPosition - center;
-            Vector3 setRelCenter = (Vector3)lerpEndPosition - center;
-
-            // The fraction of the animation that has happened so far is
-            // equal to the elapsed time divided by the desired time for
-            // the total journey.
-            float fracComplete = timer / beatTime+hitTolerance;
-
-            beat.transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
-            beat.transform.position += center;
-
-            if (timer>=beatTime)
-            {
-                
-            }
 
             if (timer>=beatTime-hitTolerance&&canBePressed==false)
             {
@@ -109,29 +57,17 @@ public class BeatSpawner : MonoBehaviour
                 timer -= beatTime+hitTolerance;
                 aiMoved = false;
                 canBePressed = false;
-
-                Vector2 tempPosition = lerpStartPosition;
-                lerpStartPosition = lerpEndPosition;
-                lerpEndPosition = tempPosition;
+                UIMetronome.FlipMetronome();
             }
             else if(timer<beatTime-hitTolerance)
             {
                 canBePressed = false;
             }
-
             if(timer>=beatTime/2&&aiMoved==false)
             {
                 aiCanMove = true;
                 aiMoved = true;
             }
-            /*if (timer >= (60f / bpm))
-            {
-                //Create the note
-                ((GameObject)Instantiate(note, this.transform.position, Quaternion.identity)).GetComponent<Transform>().parent = GetComponent<Transform>();
-                timer -= (60f / bpm);
-            }*/
-            }
-
+         }
     }
-
 }
