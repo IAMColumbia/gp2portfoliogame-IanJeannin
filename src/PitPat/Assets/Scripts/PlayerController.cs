@@ -11,9 +11,6 @@ public class PlayerController : MonoBehaviour
     private Tilemap collisionTilemap;
     [SerializeField]
     private GameObject attackMarker;
-    [Tooltip("The empty game object that will hold the instantiated attack markers")]
-    [SerializeField]
-    private GameObject markerHolder;
     [SerializeField]
     private int maxHealth=10;
 
@@ -30,7 +27,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         unitAttack=this.gameObject.AddComponent<UnitAttack>();
-        unitAttack.Initialize(this.gameObject,markerHolder);
+        unitAttack.Initialize(this.gameObject);
         unitProfile = this.gameObject.AddComponent<UnitProfile>();
         unitProfile.Initialize(maxHealth);
         movement = this.gameObject.AddComponent<Movement>();
@@ -70,7 +67,7 @@ public class PlayerController : MonoBehaviour
         {
             beatHit = true;
             BeatTrigger.beatsHit++;
-            unitAttack.Attack(attackGrid, lastDirection, attackMarker,damage);
+            unitAttack.Attack(attackGrid, lastDirection,damage);
         }
     }
     public bool Move(Vector2 direction)

@@ -89,7 +89,7 @@ public class BeatSpawner : MonoBehaviour
             // The fraction of the animation that has happened so far is
             // equal to the elapsed time divided by the desired time for
             // the total journey.
-            float fracComplete = timer / beatTime;
+            float fracComplete = timer / beatTime+hitTolerance;
 
             beat.transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
             beat.transform.position += center;

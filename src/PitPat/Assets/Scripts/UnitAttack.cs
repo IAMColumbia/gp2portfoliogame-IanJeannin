@@ -5,17 +5,16 @@ using UnityEngine;
 public class UnitAttack: MonoBehaviour
 {
     private GameObject attackingObject;
-    private GameObject markerHolder;
+    private AttackMarkers markerHolder;
     //private float secondsToClearMarkers;
-    private float timer;
 
-    public void Initialize(GameObject controller, GameObject attackMarkerHolder)
+    public void Initialize(GameObject controller)
     {
         attackingObject = controller;
-        markerHolder = attackMarkerHolder;
+        markerHolder = (AttackMarkers)FindObjectOfType(typeof(AttackMarkers));
     }
 
-    public void Attack(float[,] attackGrid,Vector3 lastDirection, GameObject attackMarker,float damage)
+    public void Attack(float[,] attackGrid,Vector3 lastDirection,float damage)
     {
         //The space that the first index of the attackGrid aligns to. 
         Vector3 targetedSpace = attackingObject.transform.position;
@@ -81,7 +80,8 @@ public class UnitAttack: MonoBehaviour
                         enemyColliders[0].gameObject.GetComponent<UnitProfile>().ChangeHealth(-damage*attackGrid[row,col]);
                         Debug.Log("Health: " + enemyColliders[0].gameObject.GetComponent<UnitProfile>().GetHealth());
                     }
-                    Instantiate(attackMarker, targetedSpace, Quaternion.identity, markerHolder.transform);
+                    markerHolder.AddMarker(targetedSpace);
+                    //Instantiate(attackMarker, targetedSpace, Quaternion.identity, markerHolder.transform);
                 }
                 if (rowIsX)
                 {
@@ -134,24 +134,7 @@ public class UnitAttack: MonoBehaviour
                 targetedSpace.y = targetedSpaceY;
             }
         }
-        timer = 0;
     }
-
-    /*private void Update()
-    {
-        Debug.Log("Is updating");
-        if(markerHolder!=null)
-        {
-            if(timer>secondsToClearMarkers)
-            {
-                foreach (Transform child in markerHolder.transform)
-                {
-                    Destroy(child.gameObject);
-                }
-            }
-            timer -= secondsToClearMarkers;
-        }
-    }*/
 
     public void RemoveMarkers()
     {

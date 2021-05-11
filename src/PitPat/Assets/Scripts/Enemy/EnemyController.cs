@@ -5,13 +5,9 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject markerHolder;
-    [SerializeField]
     private Pathfinding pathfinding;
     [SerializeField]
     private GameObject player;
-    [SerializeField]
-    private GameObject attackMarker;
     [SerializeField]
     private int maxHealth;
 
@@ -45,16 +41,12 @@ public class EnemyController : MonoBehaviour
         {
             attackManager = new AttackManager();
         }
-        if(markerHolder==null)
-        {
-            markerHolder = Instantiate(new GameObject("Marker Holder"));
-        }
         if(player==null)
         {
             player = GameObject.Find("Player");
         }
         unitAttack = this.gameObject.AddComponent<UnitAttack>();
-        unitAttack.Initialize(this.gameObject, markerHolder);
+        unitAttack.Initialize(this.gameObject);
         unitProfile = this.gameObject.AddComponent<UnitProfile>();
         unitProfile.Initialize(maxHealth);
         movement = this.gameObject.AddComponent<Movement>(); //Enemy doesn't need to initialize
@@ -138,7 +130,7 @@ public class EnemyController : MonoBehaviour
     }
     public void Attack(float[,] attackGrid, float damage)
     {
-            unitAttack.Attack(attackGrid, lastDirection, attackMarker, damage);
+            unitAttack.Attack(attackGrid, lastDirection, damage);
     }
 
     public bool Rotate(Vector2 direction)
