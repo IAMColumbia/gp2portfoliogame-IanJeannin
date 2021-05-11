@@ -44,6 +44,10 @@ public class Input : MonoBehaviour
         controls.Main.Quit.performed += ctx => Quit();
         controls.Main.SwitchAttackLeft.performed += ctx => SwitchAttackLeft();
         controls.Main.SwitchAttackRight.performed += ctx => SwitchAttackRight();
+        controls.Main.EquipSword.performed += ctx => EquipSpecificWeapon(0);
+        controls.Main.EquipSpear.performed += ctx => EquipSpecificWeapon(1);
+        controls.Main.EquipAxe.performed += ctx => EquipSpecificWeapon(2);
+        controls.Main.EquipBow.performed += ctx => EquipSpecificWeapon(3);
     }
 
     private void MoveCommand(Vector2 direction)
@@ -104,6 +108,15 @@ public class Input : MonoBehaviour
         if (CommandTarget.GetComponent<AttackManager>() && inputBlock == false)
         {
             CommandTarget.GetComponent<AttackManager>().SwitchAttack(CommandTarget.GetComponent<AttackManager>().GetAttackIndex() + 1);
+            LockInput();
+        }
+    }
+
+    private void EquipSpecificWeapon(int index)
+    {
+        if (CommandTarget.GetComponent<AttackManager>() && inputBlock == false)
+        {
+            CommandTarget.GetComponent<AttackManager>().SwitchAttack(index);
             LockInput();
         }
     }

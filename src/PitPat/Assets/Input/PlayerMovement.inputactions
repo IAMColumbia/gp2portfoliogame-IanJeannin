@@ -60,6 +60,38 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "EquipSword",
+                    "type": "Button",
+                    "id": "87f55f08-4e0d-472e-8258-18ddb778acce",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "EquipSpear",
+                    "type": "Button",
+                    "id": "7ed9b430-f8a8-4b4e-8060-26d2ee8ccb5d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "EquipAxe",
+                    "type": "Button",
+                    "id": "b437c691-d1d8-4da4-9802-c26444ebaec2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "EquipBow",
+                    "type": "Button",
+                    "id": "332733c9-cc64-4294-8ffe-d1b708928a2a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -225,6 +257,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwitchAttackRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8154cf00-8577-492e-a415-8eb8de473546",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EquipSword",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "996fad65-b8df-4688-b3ee-f97126231a11",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EquipSpear",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8e4aaf58-8119-4868-8ae3-188aed6e2772",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EquipAxe",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "40503d09-2b5f-47d7-84c4-4a98a9c81fbc",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EquipBow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -73,6 +73,38 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""EquipSword"",
+                    ""type"": ""Button"",
+                    ""id"": ""87f55f08-4e0d-472e-8258-18ddb778acce"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""EquipSpear"",
+                    ""type"": ""Button"",
+                    ""id"": ""7ed9b430-f8a8-4b4e-8060-26d2ee8ccb5d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""EquipAxe"",
+                    ""type"": ""Button"",
+                    ""id"": ""b437c691-d1d8-4da4-9802-c26444ebaec2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""EquipBow"",
+                    ""type"": ""Button"",
+                    ""id"": ""332733c9-cc64-4294-8ffe-d1b708928a2a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -240,6 +272,50 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
                     ""action"": ""SwitchAttackRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8154cf00-8577-492e-a415-8eb8de473546"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipSword"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""996fad65-b8df-4688-b3ee-f97126231a11"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipSpear"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e4aaf58-8119-4868-8ae3-188aed6e2772"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipAxe"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""40503d09-2b5f-47d7-84c4-4a98a9c81fbc"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipBow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -255,6 +331,10 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
         m_Main_Quit = m_Main.FindAction("Quit", throwIfNotFound: true);
         m_Main_SwitchAttackLeft = m_Main.FindAction("SwitchAttackLeft", throwIfNotFound: true);
         m_Main_SwitchAttackRight = m_Main.FindAction("SwitchAttackRight", throwIfNotFound: true);
+        m_Main_EquipSword = m_Main.FindAction("EquipSword", throwIfNotFound: true);
+        m_Main_EquipSpear = m_Main.FindAction("EquipSpear", throwIfNotFound: true);
+        m_Main_EquipAxe = m_Main.FindAction("EquipAxe", throwIfNotFound: true);
+        m_Main_EquipBow = m_Main.FindAction("EquipBow", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -311,6 +391,10 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
     private readonly InputAction m_Main_Quit;
     private readonly InputAction m_Main_SwitchAttackLeft;
     private readonly InputAction m_Main_SwitchAttackRight;
+    private readonly InputAction m_Main_EquipSword;
+    private readonly InputAction m_Main_EquipSpear;
+    private readonly InputAction m_Main_EquipAxe;
+    private readonly InputAction m_Main_EquipBow;
     public struct MainActions
     {
         private @PlayerMovement m_Wrapper;
@@ -322,6 +406,10 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
         public InputAction @Quit => m_Wrapper.m_Main_Quit;
         public InputAction @SwitchAttackLeft => m_Wrapper.m_Main_SwitchAttackLeft;
         public InputAction @SwitchAttackRight => m_Wrapper.m_Main_SwitchAttackRight;
+        public InputAction @EquipSword => m_Wrapper.m_Main_EquipSword;
+        public InputAction @EquipSpear => m_Wrapper.m_Main_EquipSpear;
+        public InputAction @EquipAxe => m_Wrapper.m_Main_EquipAxe;
+        public InputAction @EquipBow => m_Wrapper.m_Main_EquipBow;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -352,6 +440,18 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
                 @SwitchAttackRight.started -= m_Wrapper.m_MainActionsCallbackInterface.OnSwitchAttackRight;
                 @SwitchAttackRight.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnSwitchAttackRight;
                 @SwitchAttackRight.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnSwitchAttackRight;
+                @EquipSword.started -= m_Wrapper.m_MainActionsCallbackInterface.OnEquipSword;
+                @EquipSword.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnEquipSword;
+                @EquipSword.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnEquipSword;
+                @EquipSpear.started -= m_Wrapper.m_MainActionsCallbackInterface.OnEquipSpear;
+                @EquipSpear.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnEquipSpear;
+                @EquipSpear.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnEquipSpear;
+                @EquipAxe.started -= m_Wrapper.m_MainActionsCallbackInterface.OnEquipAxe;
+                @EquipAxe.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnEquipAxe;
+                @EquipAxe.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnEquipAxe;
+                @EquipBow.started -= m_Wrapper.m_MainActionsCallbackInterface.OnEquipBow;
+                @EquipBow.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnEquipBow;
+                @EquipBow.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnEquipBow;
             }
             m_Wrapper.m_MainActionsCallbackInterface = instance;
             if (instance != null)
@@ -377,6 +477,18 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
                 @SwitchAttackRight.started += instance.OnSwitchAttackRight;
                 @SwitchAttackRight.performed += instance.OnSwitchAttackRight;
                 @SwitchAttackRight.canceled += instance.OnSwitchAttackRight;
+                @EquipSword.started += instance.OnEquipSword;
+                @EquipSword.performed += instance.OnEquipSword;
+                @EquipSword.canceled += instance.OnEquipSword;
+                @EquipSpear.started += instance.OnEquipSpear;
+                @EquipSpear.performed += instance.OnEquipSpear;
+                @EquipSpear.canceled += instance.OnEquipSpear;
+                @EquipAxe.started += instance.OnEquipAxe;
+                @EquipAxe.performed += instance.OnEquipAxe;
+                @EquipAxe.canceled += instance.OnEquipAxe;
+                @EquipBow.started += instance.OnEquipBow;
+                @EquipBow.performed += instance.OnEquipBow;
+                @EquipBow.canceled += instance.OnEquipBow;
             }
         }
     }
@@ -390,5 +502,9 @@ public class @PlayerMovement : IInputActionCollection, IDisposable
         void OnQuit(InputAction.CallbackContext context);
         void OnSwitchAttackLeft(InputAction.CallbackContext context);
         void OnSwitchAttackRight(InputAction.CallbackContext context);
+        void OnEquipSword(InputAction.CallbackContext context);
+        void OnEquipSpear(InputAction.CallbackContext context);
+        void OnEquipAxe(InputAction.CallbackContext context);
+        void OnEquipBow(InputAction.CallbackContext context);
     }
 }
