@@ -11,8 +11,6 @@ public class PlayerController : MonoBehaviour
     private Tilemap collisionTilemap;
     [SerializeField]
     private GameObject attackMarker;
-    [SerializeField]
-    private int maxHealth=10;
 
     //Player starts the game looking down
     private Vector3 lastDirection = new Vector3(0, -1, 0);
@@ -29,7 +27,7 @@ public class PlayerController : MonoBehaviour
         unitAttack=this.gameObject.AddComponent<UnitAttack>();
         unitAttack.Initialize(this.gameObject);
         unitProfile = this.gameObject.AddComponent<UnitProfile>();
-        unitProfile.Initialize(maxHealth);
+        unitProfile.Initialize();
         movement = this.gameObject.AddComponent<Movement>();
         movement.Initialize(groundTilemap, collisionTilemap);
 

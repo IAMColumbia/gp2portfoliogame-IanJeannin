@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8347156568882130835}
   - component: {fileID: 8347156568882130834}
   - component: {fileID: 8347156568882130845}
+  - component: {fileID: 6063944628446169179}
   - component: {fileID: 8347156568882130832}
   m_Layer: 0
   m_Name: Player
@@ -98,6 +99,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundTilemap: {fileID: 0}
   collisionTilemap: {fileID: 0}
+  attackMarker: {fileID: 0}
+--- !u!114 &6063944628446169179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8347156568882130844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 389edfe6193cd184c91511b220749b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 15
 --- !u!114 &8347156568882130832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,3 +126,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CommandTarget: {fileID: 8347156568882130844}
+  audioManager: {fileID: 0}
+  inputLockTime: 0.5

@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class UnitProfile : MonoBehaviour
 {
-    private float maxHealth;
+    [SerializeField]
+    private int maxHealth;
+
+    private int defaultHealth = 5;
     private float currentHealth;
 
-    public void Initialize(int startingHealth)
+    private void Start()
     {
-        maxHealth = startingHealth;
+        currentHealth = maxHealth;
+    }
+
+    //Used by other controller scripts if prefab doesn't have a UnitProfile
+    public void Initialize()
+    {
+        maxHealth = defaultHealth;
         currentHealth = maxHealth;
     }
 

@@ -8,8 +8,6 @@ public class EnemyController : MonoBehaviour
     private Pathfinding pathfinding;
     [SerializeField]
     private GameObject player;
-    [SerializeField]
-    private int maxHealth;
 
     //Player starts the game looking down
     private Vector3 lastDirection = new Vector3(0, -1, 0);
@@ -23,7 +21,7 @@ public class EnemyController : MonoBehaviour
     private float failureChance=30;
 
     //Variables used to prevent skeletons moving every single beat.
-    private float beatsToMove = 3;
+    private float beatsToMove = 2;
     private float beatCounter = 0;
 
     private UnitAttack unitAttack;
@@ -47,8 +45,11 @@ public class EnemyController : MonoBehaviour
         }
         unitAttack = this.gameObject.AddComponent<UnitAttack>();
         unitAttack.Initialize(this.gameObject);
-        unitProfile = this.gameObject.AddComponent<UnitProfile>();
-        unitProfile.Initialize(maxHealth);
+        if(this.gameObject.GetComponent<UnitProfile>()==null)
+        {
+            unitProfile = this.gameObject.AddComponent<UnitProfile>();
+            unitProfile.Initialize();
+        }
         movement = this.gameObject.AddComponent<Movement>(); //Enemy doesn't need to initialize
     }
 
@@ -84,13 +85,11 @@ public class EnemyController : MonoBehaviour
                 {
                     beatCounter = 0;
                     hasMovedThisBeat = true;
-                    float successChance = Random.Range(0, 100);
-                    float successMarker = maxSuccessChance - failureChance;
                     if (IsAdjacentToPlayer() == false)
                     {
                         SetMovementVector();
                     }
-                    else if (this.transform.position + lastDirection != player.transform.position)
+                    else if (this.transform.position + lastDirection != player.transform.position) //If enemy is not currently facing the player
                     {
                         Vector2 lookDirection = player.transform.position - this.transform.position;
                         Rotate(lookDirection);

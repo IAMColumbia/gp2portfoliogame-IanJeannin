@@ -92,14 +92,20 @@ public class Input : MonoBehaviour
 
     private void SwitchAttackLeft()
     {
-        //AttackManager atkManager = CommandTarget.GetComponent<AttackManager>();
-        CommandTarget.GetComponent<AttackManager>().SwitchAttack(CommandTarget.GetComponent<AttackManager>().GetAttackIndex()-1);
+        if (CommandTarget.GetComponent<AttackManager>() && inputBlock == false)
+        {
+            CommandTarget.GetComponent<AttackManager>().SwitchAttack(CommandTarget.GetComponent<AttackManager>().GetAttackIndex() - 1);
+            LockInput();
+        }
     }
 
     private void SwitchAttackRight()
     {
-        //AttackManager atkManager = CommandTarget.GetComponent<AttackManager>();
-        CommandTarget.GetComponent<AttackManager>().SwitchAttack(CommandTarget.GetComponent<AttackManager>().GetAttackIndex() + 1);
+        if (CommandTarget.GetComponent<AttackManager>() && inputBlock == false)
+        {
+            CommandTarget.GetComponent<AttackManager>().SwitchAttack(CommandTarget.GetComponent<AttackManager>().GetAttackIndex() + 1);
+            LockInput();
+        }
     }
 
     private void MuteCommand()

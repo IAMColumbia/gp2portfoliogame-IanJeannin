@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 1952293315}
   - component: {fileID: 1952293316}
   - component: {fileID: 2913246576419682562}
+  - component: {fileID: 5948191177884464640}
   m_Layer: 9
   m_Name: Skeleton
   m_TagString: Untagged
@@ -264,12 +265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27afc4a5e1173144c8a738f88f94e6a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  markerHolder: {fileID: 0}
   pathfinding: {fileID: 1952293315}
   player: {fileID: 0}
-  attackMarker: {fileID: 5010222623209261962, guid: 18cb7835b3e4ce14b8fbc32b0add2339,
-    type: 3}
-  maxHealth: 3
   missedBeatWeight: 7.5
   maxSuccessChance: 100
 --- !u!61 &9101231249518810996
@@ -357,3 +354,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   greenHealth: {fileID: 2655568620804021298}
   redHealth: {fileID: 1523275894076477600}
+--- !u!114 &5948191177884464640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9101231249518810888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 389edfe6193cd184c91511b220749b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 6

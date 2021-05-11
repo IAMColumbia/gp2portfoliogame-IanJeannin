@@ -38,7 +38,7 @@ public class RangedAttack : Attack
     {
         float[,] attackedSpacesX = new float[7, 7]
         {
-            {0,0,0,3,0,0,0},
+            {0,0,0,5,0,0,0},
             {0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0},
